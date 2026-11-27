@@ -14,6 +14,7 @@ import {
 import { useWorkspace } from "../workspace/store";
 import { BoardField } from "./BoardField";
 import { BoardInspector } from "./BoardInspector";
+import { BoardControlIcon } from "./BoardControlIcon";
 import {
   boardUnits,
   diffLabels,
@@ -146,7 +147,9 @@ function MatchBoard({
         return;
       if (
         event.target instanceof Element &&
-        event.target.closest("input, select, textarea, [contenteditable]")
+        event.target.closest(
+          "input, select, textarea, [contenteditable], dialog",
+        )
       )
         return;
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
@@ -238,7 +241,7 @@ function MatchBoard({
                   aria-pressed={showDiff}
                   onClick={() => setShowDiff(!showDiff)}
                 >
-                  Diff
+                  <BoardControlIcon name="diff" /> Diff
                 </button>
                 {calibrated && (
                   <>
@@ -247,14 +250,14 @@ function MatchBoard({
                       aria-pressed={showFlanks}
                       onClick={() => setShowFlanks(!showFlanks)}
                     >
-                      Flanks
+                      <BoardControlIcon name="flank" /> Flanks
                     </button>
                     <button
                       type="button"
                       aria-pressed={showDefense}
                       onClick={() => setShowDefense(!showDefense)}
                     >
-                      Tower defense
+                      <BoardControlIcon name="tower" /> Tower defense
                     </button>
                   </>
                 )}
@@ -341,10 +344,10 @@ function MatchBoard({
                     setCamera((view) => ({ ...view, x: -view.x, y: -view.y }));
                   }}
                 >
-                  Flip board
+                  <BoardControlIcon name="flip" /> Flip board
                 </button>
                 <button type="button" onClick={() => setCamera(initialCamera)}>
-                  Reset view
+                  <BoardControlIcon name="reset" /> Reset view
                 </button>
                 <details className="board-pan">
                   <summary>Pan</summary>

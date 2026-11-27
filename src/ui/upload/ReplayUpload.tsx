@@ -104,7 +104,12 @@ export function ReplayUpload({
             onDemoSelected();
           }}
         >
-          Try demo match
+          <span>Try demo match</span>
+          {!replayName && (
+            <span className="demo-detail" aria-hidden="true">
+              Nine rounds
+            </span>
+          )}
         </button>
       </footer>
     </section>

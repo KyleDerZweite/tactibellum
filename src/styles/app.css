@@ -8,7 +8,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-interface);
     outline-offset: 4px;
   }
 
@@ -28,11 +28,11 @@
   }
 
   .topbar {
-    @apply flex min-h-16 flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-panel px-4 py-3 sm:px-6;
+    @apply flex min-h-14 flex-wrap items-center gap-x-3 gap-y-2 border-b border-line bg-panel px-4 py-2 sm:px-6;
   }
 
   .brand {
-    @apply text-lg font-bold tracking-tight;
+    @apply text-lg font-black uppercase tracking-wide;
   }
 
   .replay-name {
@@ -40,12 +40,12 @@
   }
 
   .source-link {
-    @apply ml-auto py-1 text-sm text-accent hover:underline;
+    @apply ml-auto py-1 text-sm text-interface hover:underline;
   }
 
   .menu-button,
   .desktop-menu-button {
-    @apply rounded-md border border-line px-3 py-2 text-sm hover:bg-raised;
+    @apply rounded-sm border border-control-border px-3 py-2 text-sm hover:bg-raised;
   }
 
   .desktop-menu-button {
@@ -57,7 +57,7 @@
   }
 
   .workspace {
-    @apply md:grid md:min-h-[calc(100dvh-4rem)] md:grid-cols-[15rem_minmax(0,1fr)];
+    @apply md:grid md:min-h-[calc(100dvh-3.5rem)] md:grid-cols-[15rem_minmax(0,1fr)];
   }
 
   .workspace[data-sidebar-collapsed="true"] {
@@ -87,7 +87,11 @@
   }
 
   .view-list a[aria-current="page"] {
-    @apply bg-raised font-semibold text-accent;
+    @apply border-s-2 border-interface bg-interface/10 font-semibold text-interface;
+  }
+
+  .view-list a:hover {
+    @apply bg-interface/10 text-interface;
   }
 
   .unavailable-view {
@@ -110,8 +114,36 @@
     @apply text-3xl font-semibold tracking-tight sm:text-5xl;
   }
 
-  .intro {
-    @apply mt-3 max-w-prose text-muted;
+  .main-content:has(.replay-hero) {
+    @apply max-w-6xl py-6 sm:py-8;
+  }
+
+  .replay-hero {
+    @apply grid min-h-64 content-end gap-3 bg-panel px-6 py-7 sm:min-h-80 sm:px-10 sm:py-9;
+    border-bottom: 2px solid var(--color-interface);
+    background-image:
+      linear-gradient(90deg, #171514 4%, #171514d9 38%, #17151430 100%),
+      url("../ui/upload/replay-banner.webp");
+    background-position:
+      center,
+      68% 53%;
+    background-size: cover;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 12px) 0,
+      100% 12px,
+      100% 100%,
+      12px 100%,
+      0 calc(100% - 12px)
+    );
+  }
+
+  .replay-hero h1 {
+    @apply font-black uppercase;
+  }
+
+  .replay-hero p {
+    @apply max-w-84 text-sm text-text sm:text-base;
   }
 
   .upload-panel {
@@ -135,7 +167,7 @@
   }
 
   .primary-button {
-    @apply rounded-md bg-accent px-4 py-2.5 font-semibold text-on-accent hover:bg-accent/90;
+    @apply rounded-sm bg-interface px-4 py-2.5 font-semibold text-on-interface hover:bg-interface/90;
   }
 
   .upload-feedback {
@@ -155,7 +187,68 @@
   }
 
   .upload-footer button {
-    @apply rounded-md border border-line px-3 py-2;
+    @apply rounded-sm border border-interface/50 px-3 py-2 font-medium text-interface;
+  }
+
+  .replay-hero + .upload-panel {
+    @apply mt-4 grid gap-3 rounded-none border-0 bg-transparent p-0 sm:grid-cols-[minmax(0,3fr)_minmax(0,2fr)];
+  }
+
+  .replay-hero + .upload-panel .drop-area,
+  .replay-hero + .upload-panel .upload-footer button {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 9px) 0,
+      100% 9px,
+      100% 100%,
+      9px 100%,
+      0 calc(100% - 9px)
+    );
+  }
+
+  .replay-hero + .upload-panel .drop-area {
+    @apply min-h-48 rounded-none bg-panel;
+  }
+
+  .replay-hero + .upload-panel .drop-area[data-dragging="true"] {
+    @apply border-interface bg-interface/10;
+  }
+
+  .replay-hero + .upload-panel .upload-footer {
+    @apply contents;
+  }
+
+  .replay-hero + .upload-panel .upload-footer p {
+    @apply order-last py-1 text-sm sm:col-span-2;
+  }
+
+  .replay-hero + .upload-panel .upload-footer button {
+    @apply flex min-h-32 flex-col justify-end gap-1 rounded-none border border-interface/50 p-5 text-left text-lg text-text;
+    background: linear-gradient(145deg, #51361b, #26211d 68%);
+  }
+
+  .replay-hero + .upload-panel .upload-footer button:hover {
+    border-color: var(--color-interface);
+    background: linear-gradient(145deg, #65421e, #2f2520 68%);
+  }
+
+  .replay-hero + .upload-panel .upload-footer button:focus-visible {
+    outline-offset: -5px;
+  }
+
+  .demo-detail {
+    @apply text-sm font-normal text-interface;
+  }
+
+  @media (max-width: 639px) {
+    .replay-hero {
+      background-image:
+        linear-gradient(0deg, #171514 3%, #17151485 55%, #17151420),
+        url("../ui/upload/replay-banner.webp");
+      background-position:
+        center,
+        72% center;
+    }
   }
 }
 

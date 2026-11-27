@@ -4,6 +4,7 @@ import type {
 } from "../../core/contracts/match";
 import { knownPosition, unitLabel, diffLabels } from "./boardUnits";
 import type { DisplayUnit } from "./boardUnits";
+import { MechReferenceCard } from "./MechReferenceCard";
 
 export function BoardInspector({
   match,
@@ -91,14 +92,12 @@ export function BoardInspector({
         </label>
         {selected && unit && entry && techs && (
           <>
-            <h3>{entry.name}</h3>
+            <MechReferenceCard key={unit.unitId} data={selected} />
             <dl className="board-unit-facts">
               <dt>Player</dt>
               <dd>{selected.player.name}</dd>
               <dt>Level</dt>
               <dd>{unit.level}</dd>
-              <dt>Base cost</dt>
-              <dd>{entry.cost ?? "Unavailable"}</dd>
               <dt>Estimated value</dt>
               <dd>
                 {entry.cost === null

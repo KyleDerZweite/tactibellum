@@ -97,18 +97,22 @@ export function App() {
         />
       ) : (
         <>
-          <h1>{match ? "Overview" : "Open a replay"}</h1>
           {match ? (
             <>
+              <h1>Overview</h1>
               <MatchOverview match={match} />
               <div className="replay-section">
                 <WinnerControl meta={match.meta} onWinnerChange={setWinner} />
               </div>
             </>
           ) : (
-            <p className="intro">
-              Choose a replay saved by Mechabellum to open it in your browser.
-            </p>
+            <header className="replay-hero">
+              <h1>Open a replay</h1>
+              <p>
+                Review Mechabellum rounds, army composition, and deployment
+                decisions.
+              </p>
+            </header>
           )}
           <ReplayUpload
             replayName={replayName}

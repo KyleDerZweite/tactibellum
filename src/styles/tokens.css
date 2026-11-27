@@ -1,10 +1,10 @@
 @theme static {
   --font-sans: Inter, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --color-canvas: #0f1218;
-  --color-panel: #161b22;
-  --color-raised: #1e2530;
-  --color-line: rgb(255 255 255 / 8%);
+  --color-canvas: #181819;
+  --color-panel: #222225;
+  --color-raised: #2b2a2d;
+  --color-line: rgb(255 255 255 / 12%);
   --color-text: #edf2f8;
   --color-muted: #a9b5c4;
   --color-accent: #8bdbff;
@@ -16,4 +16,7 @@
   --color-info: var(--color-accent);
   --color-warning: var(--color-opponent);
   --color-critical: #ff9e9e;
+  --color-interface: #ffbd68;
+  --color-on-interface: #281807;
+  --color-control-border: #55555d;
 }
