@@ -1,0 +1,19 @@
+@theme static {
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-canvas: #0f1218;
+  --color-panel: #161b22;
+  --color-raised: #1e2530;
+  --color-line: rgb(255 255 255 / 8%);
+  --color-text: #edf2f8;
+  --color-muted: #a9b5c4;
+  --color-accent: #8bdbff;
+  --color-on-accent: #102331;
+  --color-opponent: #ffb778;
+  --color-added: #72deb0;
+  --color-upgraded: #c6a9ff;
+  --color-removed: #a9b5c4;
+  --color-info: var(--color-accent);
+  --color-warning: var(--color-opponent);
+  --color-critical: #ff9e9e;
+}
