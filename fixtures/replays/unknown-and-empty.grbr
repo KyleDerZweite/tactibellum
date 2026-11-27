@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BattleRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Version>959</Version>
+  <BattleInfo>
+    <MatchMode>VS_1_1</MatchMode>
+    <StartTime>1764000000</StartTime>
+    <MapID>1</MapID>
+  </BattleInfo>
+  <matchDatas>
+    <MatchSnapshotData>
+      <round>1</round>
+    </MatchSnapshotData>
+    <MatchSnapshotData>
+      <round>2</round>
+    </MatchSnapshotData>
+    <MatchSnapshotData>
+      <round>3</round>
+    </MatchSnapshotData>
+  </matchDatas>
+  <playerRecords>
+    <PlayerRecord>
+      <id>a</id>
+      <name>Lilac</name>
+      <playerRoundRecords>
+        <PlayerRoundRecord>
+          <round>1</round>
+          <playerData>
+            <unitIndex>1</unitIndex>
+            <supply>200</supply>
+            <officers>
+              <int>10002</int>
+            </officers>
+            <units>
+              <NewUnitData>
+                <id>10</id>
+                <Index>0</Index>
+                <Level>1</Level>
+                <Position>
+                  <x>14</x>
+                  <y>-70</y>
+                </Position>
+                <EquipmentID>0</EquipmentID>
+                <IsRotate>true</IsRotate>
+              </NewUnitData>
+            </units>
+            <activeTechnologies />
+            <commanderSkills />
+            <shop>
+              <unlockedUnits />
+            </shop>
+          </playerData>
+          <actionRecords>
+            <MatchActionData xsi:type="PAD_BuyUnit">
+              <UID>4021</UID>
+              <UIDX>-1</UIDX>
+            </MatchActionData>
+            <MatchActionData xsi:type="PAD_MoveUnit">
+              <moveUnitDatas>
+                <MoveUnitData>
+                  <unitID>10</unitID>
+                  <unitIndex>0</unitIndex>
+                  <position>
+                    <x>28</x>
+                    <y>-55</y>
+                  </position>
+                  <isRotate>false</isRotate>
+                </MoveUnitData>
+              </moveUnitDatas>
+            </MatchActionData>
+            <MatchActionData xsi:type="PAD_UpgradeTechnology">
+              <UID>10</UID>
+              <TechID>9999</TechID>
+            </MatchActionData>
+            <MatchActionData xsi:type="PAD_Experimental">
+              <Data>original test payload</Data>
+              <ID>444</ID>
+            </MatchActionData>
+            <MatchActionData xsi:type="PAD_FinishDeploy" />
+          </actionRecords>
+        </PlayerRoundRecord>
+        <PlayerRoundRecord>
+          <round>2</round>
+          <playerData>
+            <unitIndex>2</unitIndex>
+            <supply>400</supply>
+            <officers>
+              <int>10002</int>
+            </officers>
+            <units>
+              <NewUnitData>
+                <id>10</id>
+                <Index>0</Index>
+                <Level>1</Level>
+                <Position>
+                  <x>28</x>
+                  <y>-55</y>
+                </Position>
+                <EquipmentID>0</EquipmentID>
+                <IsRotate>false</IsRotate>
+              </NewUnitData>
+              <NewUnitData>
+                <id>4021</id>
+                <Index>1</Index>
+                <Level>0</Level>
+                <Position>
+                  <x>42</x>
+                  <y>-72</y>
+                </Position>
+                <EquipmentID>0</EquipmentID>
+                <IsRotate>false</IsRotate>
+              </NewUnitData>
+            </units>
+            <activeTechnologies>
+              <UnitData>
+                <id>10</id>
+                <techs>
+                  <tech data="9999" />
+                </techs>
+              </UnitData>
+            </activeTechnologies>
+            <commanderSkills />
+            <shop>
+              <unlockedUnits />
+            </shop>
+          </playerData>
+          <actionRecords>
+            <MatchActionData xsi:type="PAD_BuyUnit">
+              <UID>10</UID>
+              <UIDX>-1</UIDX>
+            </MatchActionData>
+            <MatchActionData xsi:type="PAD_FinishDeploy" />
+          </actionRecords>
+        </PlayerRoundRecord>
+        <PlayerRoundRecord>
+          <round>3</round>
+          <playerData>
+            <unitIndex>3</unitIndex>
+            <supply>400</supply>
+            <officers>
+              <int>10002</int>
+            </officers>
+            <units>
+              <NewUnitData>
+                <id>10</id>
+                <Index>0</Index>
+                <Level>1</Level>
+                <Position>
+                  <x>28</x>
+                  <y>-55</y>
+                </Position>
+                <EquipmentID>0</EquipmentID>
+                <IsRotate>false</IsRotate>
+              </NewUnitData>
+              <NewUnitData>
+                <id>4021</id>
+                <Index>1</Index>
+                <Level>0</Level>
+                <EquipmentID>0</EquipmentID>
+                <IsRotate>false</IsRotate>
+              </NewUnitData>
+              <NewUnitData>
+                <id>10</id>
+                <Index>2</Index>
+                <Level>0</Level>
+                <EquipmentID>0</EquipmentID>
+                <IsRotate>false</IsRotate>
+              </NewUnitData>
+            </units>
+            <activeTechnologies>
+              <UnitData>
+                <id>10</id>
+                <techs>
+                  <tech data="9999" />
+                </techs>
+              </UnitData>
+            </activeTechnologies>
+            <commanderSkills />
+            <shop>
+              <unlockedUnits />
+            </shop>
+          </playerData>
+          <actionRecords />
+        </PlayerRoundRecord>
+      </playerRoundRecords>
+    </PlayerRecord>
+    <PlayerRecord>
+      <id>b</id>
+      <name>Onyx</name>
+      <playerRoundRecords>
+        <PlayerRoundRecord>
+          <round>1</round>
+          <playerData>
+            <unitIndex>0</unitIndex>
+            <supply>400</supply>
+            <officers>
+              <int>10002</int>
+            </officers>
+            <units />
+            <activeTechnologies />
+            <commanderSkills />
+            <shop>
+              <unlockedUnits />
+            </shop>
+          </playerData>
+          <actionRecords />
+        </PlayerRoundRecord>
+        <PlayerRoundRecord>
+          <round>2</round>
+          <playerData>
+            <unitIndex>0</unitIndex>
+            <supply>400</supply>
+            <officers>
+              <int>10002</int>
+            </officers>
+            <units />
+            <activeTechnologies />
+            <commanderSkills />
+            <shop>
+              <unlockedUnits />
+            </shop>
+          </playerData>
+          <actionRecords />
+        </PlayerRoundRecord>
+        <PlayerRoundRecord>
+          <round>3</round>
+          <playerData>
+            <unitIndex>0</unitIndex>
+            <supply>400</supply>
+            <officers>
+              <int>10002</int>
+            </officers>
+            <units />
+            <activeTechnologies />
+            <commanderSkills />
+            <shop>
+              <unlockedUnits />
+            </shop>
+          </playerData>
+          <actionRecords />
+        </PlayerRoundRecord>
+      </playerRoundRecords>
+    </PlayerRecord>
+  </playerRecords>
+</BattleRecord>

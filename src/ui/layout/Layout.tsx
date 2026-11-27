@@ -1,22 +1,31 @@
 import { useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { useWorkspace } from "../workspace/store";
+import type { ReplayView } from "../workspace/store";
 
 const upcomingViews = [
   "2D Tactical Board",
   "Economy & Graphs",
   "Rule Findings",
-  "Action Log",
-  "Raw JSON",
+];
+
+const views: [ReplayView, string][] = [
+  ["overview", "Overview"],
+  ["action-log", "Action Log"],
+  ["raw-json", "Raw JSON"],
 ];
 
 interface LayoutProps {
   children: ReactNode;
   replayName?: string;
+  patch?: string;
 }
 
-export function Layout({ children, replayName }: LayoutProps) {
+export function Layout({ children, replayName, patch }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [desktopCollapsed, setDesktopCollapsed] = useState(false);
+  const view = useWorkspace((state) => state.view);
+  const setView = useWorkspace((state) => state.setView);
   const menuButton = useRef<HTMLButtonElement>(null);
 
   return (
@@ -60,6 +69,7 @@ export function Layout({ children, replayName }: LayoutProps) {
         </a>
         <span className="replay-name" title={replayName}>
           {replayName ?? "No replay selected"}
+          {patch && ` · Patch ${patch}`}
         </span>
         <a
           className="source-link"
@@ -77,15 +87,31 @@ export function Layout({ children, replayName }: LayoutProps) {
         >
           <nav aria-label="Replay views">
             <ul className="view-list">
-              <li>
-                <a
-                  href="#main"
-                  aria-current="page"
-                  onClick={() => setSidebarOpen(false)}
+              {views.map(([id, label]) => (
+                <li
+                  key={id}
+                  className={
+                    id !== "overview" && !replayName
+                      ? "unavailable-view"
+                      : undefined
+                  }
                 >
-                  Overview
-                </a>
-              </li>
+                  {id === "overview" || replayName ? (
+                    <a
+                      href="#main"
+                      aria-current={view === id ? "page" : undefined}
+                      onClick={() => {
+                        setView(id);
+                        setSidebarOpen(false);
+                      }}
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    label
+                  )}
+                </li>
+              ))}
               {upcomingViews.map((view) => (
                 <li className="unavailable-view" key={view}>
                   {view}

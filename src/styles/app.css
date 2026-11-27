@@ -158,3 +158,64 @@
     @apply rounded-md border border-line px-3 py-2;
   }
 }
+
+@layer components {
+  .replay-section {
+    @apply mt-6 grid min-w-0 gap-4 rounded-xl border border-line bg-panel p-4 sm:p-6;
+  }
+
+  .replay-section h2 {
+    @apply text-lg font-semibold;
+  }
+
+  .match-facts {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+
+  .match-facts dt,
+  .replay-warnings,
+  .action-list code {
+    @apply text-sm text-muted;
+  }
+
+  .match-facts dd,
+  .action-list li {
+    @apply wrap-anywhere;
+  }
+
+  .replay-warnings {
+    @apply mt-2 list-disc space-y-1 pl-5;
+  }
+
+  .round-select {
+    @apply flex items-center gap-3;
+  }
+
+  .round-select select {
+    @apply rounded-md border border-line bg-canvas px-3 py-2 font-mono;
+  }
+
+  .action-player {
+    @apply grid gap-2;
+  }
+
+  .action-list {
+    @apply divide-y divide-line rounded-md border border-line;
+  }
+
+  .action-list li {
+    @apply flex flex-wrap gap-x-3 gap-y-1 px-3 py-2;
+  }
+
+  .action-list li > :first-child {
+    @apply capitalize;
+  }
+
+  .json-output {
+    @apply block w-full min-w-0 rounded-md border border-line bg-canvas p-3 font-mono text-sm;
+  }
+
+  .upload-footer button:hover {
+    @apply bg-raised text-text;
+  }
+}

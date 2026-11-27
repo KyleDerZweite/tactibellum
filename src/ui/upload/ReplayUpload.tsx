@@ -2,11 +2,17 @@ import { useRef, useState } from "react";
 
 interface ReplayUploadProps {
   replayName?: string;
+  loading: boolean;
+  loadError: string;
+  onDemoSelected: () => void;
   onReplaySelected: (file: File) => void;
 }
 
 export function ReplayUpload({
   replayName,
+  loading,
+  loadError,
+  onDemoSelected,
   onReplaySelected,
 }: ReplayUploadProps) {
   const input = useRef<HTMLInputElement>(null);
@@ -75,17 +81,25 @@ export function ReplayUpload({
         </button>
         <div className="upload-feedback">
           <p role="status">
-            {replayName
-              ? `${replayName} selected. Replay analysis is coming soon.`
-              : ""}
+            {loading
+              ? "Reading replay…"
+              : replayName
+                ? `${replayName} loaded.`
+                : ""}
           </p>
-          <p role="alert">{error}</p>
+          <p role="alert">{error || loadError}</p>
         </div>
       </div>
       <footer className="upload-footer">
         <p>Replay files stay in your browser.</p>
-        <button type="button" disabled>
-          Demo coming soon
+        <button
+          type="button"
+          onClick={() => {
+            setError("");
+            onDemoSelected();
+          }}
+        >
+          Try demo match
         </button>
       </footer>
     </section>

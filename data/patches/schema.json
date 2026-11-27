@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tactibellum patch catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "sources",
+    "notes",
+    "units",
+    "spells",
+    "specialists",
+    "items",
+    "devices",
+    "towers",
+    "blueprints"
+  ],
+  "properties": {
+    "version": { "$ref": "#/$defs/nonemptyString" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+    "notes": { "type": "array", "items": { "$ref": "#/$defs/nonemptyString" } },
+    "units": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/unit" }
+    },
+    "spells": { "$ref": "#/$defs/namedEntryMap" },
+    "specialists": { "$ref": "#/$defs/namedEntryMap" },
+    "items": { "$ref": "#/$defs/namedEntryMap" },
+    "devices": { "$ref": "#/$defs/namedEntryMap" },
+    "towers": { "$ref": "#/$defs/namedEntryMap" },
+    "blueprints": { "$ref": "#/$defs/namedEntryMap" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "nonemptyString": { "type": "string", "minLength": 1 },
+    "nonnegativeNumber": { "type": "number", "minimum": 0 },
+    "nullableNonnegativeNumber": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "roles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonemptyString" },
+      "uniqueItems": true
+    },
+    "footprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "tech": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "cost", "statModifiers", "addedRoles"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonemptyString" },
+        "cost": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "statModifiers": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        },
+        "addedRoles": { "$ref": "#/$defs/roles" }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "cost",
+        "unlockCost",
+        "tier",
+        "footprint",
+        "range",
+        "speed",
+        "isAir",
+        "canTargetAir",
+        "canTargetGround",
+        "roles",
+        "techs"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "$ref": "#/$defs/nonemptyString" },
+        "cost": { "$ref": "#/$defs/nonnegativeNumber" },
+        "unlockCost": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "tier": { "enum": [100, 200, 300, 400, 800] },
+        "footprint": { "$ref": "#/$defs/footprint" },
+        "range": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "speed": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "isAir": { "type": "boolean" },
+        "canTargetAir": { "type": "boolean" },
+        "canTargetGround": { "type": "boolean" },
+        "roles": { "$ref": "#/$defs/roles" },
+        "techs": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/$defs/id" },
+          "additionalProperties": { "$ref": "#/$defs/tech" }
+        }
+      }
+    },
+    "namedEntryMap": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/namedEntry" }
+    },
+    "namedEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "cost"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonemptyString" },
+        "cost": { "$ref": "#/$defs/nullableNonnegativeNumber" }
+      }
+    }
+  }
+}

@@ -1,0 +1,2976 @@
+{
+  "version": "2.0.0.5.2340",
+  "sources": [
+    "https://github.com/qbisi/mechcore/tree/c6326dae74da9542e03c34da0c0b8066be193ae6/config",
+    "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/GAME_VERSION",
+    "https://github.com/ShotgunCrocodile/mechabellum_replay_parser/tree/2cfa38123bcc33b8f2c68787342c6b754b6a36fe",
+    "https://github.com/mechstats/mech-data/tree/ac0f0e833ff2a4ea89fa899582982dc661dd03a8/data/1.8.0.3",
+    "https://github.com/FogMoe/Mechabellum/blob/4d6379abbcd0cda30146dfc3749341876e4b8d25/src/mechabellum/collector/unit_catalog.py"
+  ],
+  "notes": [
+    "The catalog covers the 33 recruitable units in the 2.0.0.5.2340 Standard Versus data extracted by mechcore. Later builds and mode-specific or summoned units can contain additional IDs.",
+    "Unit cost and unlockCost are base supply charges, before specialist, card, or other discounts. A zero unlock price is omitted by the source exporter and restored here. Tier groups units for analysis. Overlord costs 500 supply and belongs to tier 400.",
+    "Footprints estimate board occupancy using each squad’s extracted formation card width and depth in metres. The height field represents board depth. These dimensions approximate occupied space and do not describe collision bounds.",
+    "Range is the extracted main attack range in metres, including internal melee ranges. Speed is base movement speed in metres per second. Domain and targeting describe the unmodified unit and its main attack. Secondary weapons and technology can change effective targeting and range.",
+    "Roles and addedRoles are Tactibellum heuristics. statModifiers records only verified flat additions to main attack range in metres and speed in metres per second. An empty map leaves other effects unspecified.",
+    "Tech costs are base supply before the surcharge for previously researched techs. Legacy-only tech IDs retain their old names with null costs. Other null costs indicate that this catalog has no verified price for the entry.",
+    "Specialists includes opening specialists and officer cards because both use officer IDs. Spell and item costs refer to reinforcement acquisition when applicable. Devices, tower skills, and blueprints use their respective action IDs and base supply costs.",
+    "The legacy MIT replay parser, the earlier mechstats extraction, and FogMoe’s unit lookup cross-check replay IDs. Balance values use the stated mechcore build. The catalog contains field facts and project-authored tags."
+  ],
+  "units": {
+    "1": {
+      "id": "1",
+      "name": "Fortress",
+      "cost": 400,
+      "unlockCost": 200,
+      "tier": 400,
+      "footprint": {
+        "width": 40,
+        "height": 40
+      },
+      "range": 100,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["giant", "chaff-clear"],
+      "techs": {
+        "701": {
+          "name": "Doubleshot",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1001": {
+          "name": "Barrier",
+          "cost": 500,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1105": {
+          "name": "Anti-Air Barrage",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": ["anti-air"]
+        },
+        "1201": {
+          "name": "Fang Production",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3001": {
+          "name": "Armor Enhancement",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10201": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10301": {
+          "name": "Launcher Overload",
+          "cost": 150,
+          "statModifiers": {
+            "range": -20.0
+          },
+          "addedRoles": []
+        },
+        "10401": {
+          "name": "Solid Shot",
+          "cost": 200,
+          "statModifiers": {
+            "range": 60.0
+          },
+          "addedRoles": []
+        },
+        "10801": {
+          "name": "Elite Marksman",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "110201": {
+          "name": "Rocket Punch",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "2": {
+      "id": "2",
+      "name": "Marksman",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 20,
+        "height": 20
+      },
+      "range": 140,
+      "speed": 8,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["single-target", "anti-air"],
+      "techs": {
+        "702": {
+          "name": "Doubleshot",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1202": {
+          "name": "Shooting Squad",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1802": {
+          "name": "Electromagnetic Shot",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3202": {
+          "name": "Aerial Specialization",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10102": {
+          "name": "Assault Mode",
+          "cost": 200,
+          "statModifiers": {
+            "range": -70.0,
+            "speed": 3.0
+          },
+          "addedRoles": []
+        },
+        "10202": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10402": {
+          "name": "Quick Reload",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10802": {
+          "name": "Elite Marksman",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "3": {
+      "id": "3",
+      "name": "Vulcan",
+      "cost": 400,
+      "unlockCost": 200,
+      "tier": 400,
+      "footprint": {
+        "width": 40,
+        "height": 40
+      },
+      "range": 95,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["giant", "chaff-clear"],
+      "techs": {
+        "1103": {
+          "name": "Incendiary Bomb",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1203": {
+          "name": "Best Partner",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3003": {
+          "name": "Armor Enhancement",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10203": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10603": {
+          "name": "Scorching Fire",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "11010": {
+          "name": "Sticky Oil Bomb",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180203": {
+          "name": "Ignite",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "4": {
+      "id": "4",
+      "name": "Melting Point",
+      "cost": 400,
+      "unlockCost": 200,
+      "tier": 400,
+      "footprint": {
+        "width": 40,
+        "height": 40
+      },
+      "range": 115,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["giant", "single-target", "anti-air"],
+      "techs": {
+        "304": {
+          "name": "Energy Absorption",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1106": {
+          "name": "Electromagnetic Barrage",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1107": {
+          "name": "Energy Diffraction",
+          "cost": 150,
+          "statModifiers": {
+            "range": -30.0
+          },
+          "addedRoles": []
+        },
+        "1204": {
+          "name": "Crawler Production",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3004": {
+          "name": "Armor Enhancement",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10204": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        }
+      }
+    },
+    "5": {
+      "id": "5",
+      "name": "Rhino",
+      "cost": 200,
+      "unlockCost": 50,
+      "tier": 200,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 6,
+      "speed": 16,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear"],
+      "techs": {
+        "905": {
+          "name": "Field Maintenance",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1109": {
+          "name": "Whirlwind",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "2305": {
+          "name": "Wreckage Recycling",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "2505": {
+          "name": "Power Armor",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "2805": {
+          "name": "Final Blitz",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3005": {
+          "name": "Armor Enhancement",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10505": {
+          "name": "Mechanical Rage",
+          "cost": 100,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "180305": {
+          "name": "Photon Coating",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180805": {
+          "name": "Combat Evolvement",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "6": {
+      "id": "6",
+      "name": "Wasp",
+      "cost": 200,
+      "unlockCost": 50,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 50,
+      "speed": 16,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["chaff", "anti-air"],
+      "techs": {
+        "206": {
+          "name": "Energy Shield",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "406": {
+          "name": "High-Explosive Ammo",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "506": {
+          "name": "Ground Specialization",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1606": {
+          "name": "Jump Drive",
+          "cost": 100,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "1806": {
+          "name": "Electromagnetic Shot",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3206": {
+          "name": "Aerial Specialization",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10206": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10606": {
+          "name": "Armor-Piercing Bullets",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10806": {
+          "name": "Elite Marksman",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180206": {
+          "name": "Ignite",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "7": {
+      "id": "7",
+      "name": "Mustang",
+      "cost": 200,
+      "unlockCost": 0,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 95,
+      "speed": 16,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["chaff-clear", "anti-air"],
+      "techs": {
+        "407": {
+          "name": "High-Explosive Ammo",
+          "cost": 50,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3207": {
+          "name": "Aerial Specialization",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3307": {
+          "name": "Missile Interceptor",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": ["missile-interception"]
+        },
+        "4607": {
+          "name": "Culling Rounds",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10207": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10607": {
+          "name": "Armor-Piercing Bullets",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "8": {
+      "id": "8",
+      "name": "Steel Ball",
+      "cost": 200,
+      "unlockCost": 0,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 45,
+      "speed": 16,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["single-target"],
+      "techs": {
+        "308": {
+          "name": "Energy Absorption",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "608": {
+          "name": "Damage Sharing",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1308": {
+          "name": "Mechanical Division",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "2408": {
+          "name": "Fortified Target Lock",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3008": {
+          "name": "Armor Enhancement",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10208": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "180808": {
+          "name": "Kinetic Charge",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "9": {
+      "id": "9",
+      "name": "Fang",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 75,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["chaff"],
+      "techs": {
+        "209": {
+          "name": "Portable Shield",
+          "cost": 450,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3109": {
+          "name": "Grenade Launcher",
+          "cost": 150,
+          "statModifiers": {
+            "range": 10.0
+          },
+          "addedRoles": ["anti-air"]
+        },
+        "10209": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10509": {
+          "name": "Mechanical Rage",
+          "cost": 250,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "10609": {
+          "name": "Armor-Piercing Bullets",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180209": {
+          "name": "Ignite",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "10": {
+      "id": "10",
+      "name": "Crawler",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 6,
+      "speed": 16,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff"],
+      "techs": {
+        "2610": {
+          "name": "Subterranean Blitz",
+          "cost": 350,
+          "statModifiers": {
+            "speed": 3.0
+          },
+          "addedRoles": []
+        },
+        "2710": {
+          "name": "Acidic Explosion",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3510": {
+          "name": "Loose Formation",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10510": {
+          "name": "Mechanical Rage",
+          "cost": 100,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "10710": {
+          "name": "Impact Drill",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180110": {
+          "name": "Replicate",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "11": {
+      "id": "11",
+      "name": "Overlord",
+      "cost": 500,
+      "unlockCost": 200,
+      "tier": 400,
+      "footprint": {
+        "width": 50,
+        "height": 50
+      },
+      "range": 120,
+      "speed": 10,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["giant", "single-target", "anti-air"],
+      "techs": {
+        "411": {
+          "name": "High-Explosive Ammo",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "911": {
+          "name": "Field Maintenance",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1108": {
+          "name": "Overlord Artillery",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1211": {
+          "name": "Mothership",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1611": {
+          "name": "Jump Drive",
+          "cost": 300,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "3011": {
+          "name": "Armor Enhancement",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10211": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10311": {
+          "name": "Launcher Overload",
+          "cost": 300,
+          "statModifiers": {
+            "range": -20.0
+          },
+          "addedRoles": []
+        },
+        "180311": {
+          "name": "Photon Emission",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "12": {
+      "id": "12",
+      "name": "Stormcaller",
+      "cost": 200,
+      "unlockCost": 50,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 180,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear", "siege"],
+      "techs": {
+        "412": {
+          "name": "High-Explosive Ammo",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "812": {
+          "name": "Incendiary Bomb",
+          "cost": 350,
+          "statModifiers": {
+            "range": -20.0
+          },
+          "addedRoles": []
+        },
+        "1812": {
+          "name": "Electromagnetic Explosion",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10212": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10312": {
+          "name": "Launcher Overload",
+          "cost": 250,
+          "statModifiers": {
+            "range": -40.0,
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "10912": {
+          "name": "Heavy Missile",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "13": {
+      "id": "13",
+      "name": "Sledgehammer",
+      "cost": 200,
+      "unlockCost": 0,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 95,
+      "speed": 7,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear"],
+      "techs": {
+        "613": {
+          "name": "Damage Sharing",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "913": {
+          "name": "Field Maintenance",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1813": {
+          "name": "Electromagnetic Shot",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3013": {
+          "name": "Armor Enhancement",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10213": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10513": {
+          "name": "Mechanical Rage",
+          "cost": 150,
+          "statModifiers": {
+            "speed": 6.0
+          },
+          "addedRoles": []
+        },
+        "10613": {
+          "name": "Armor-Piercing Bullets",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "14": {
+      "id": "14",
+      "name": "Hacker",
+      "cost": 200,
+      "unlockCost": 100,
+      "tier": 200,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 110,
+      "speed": 8,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["control", "single-target"],
+      "techs": {
+        "1014": {
+          "name": "Barrier",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1714": {
+          "name": "Enhanced Control",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1814": {
+          "name": "Electromagnetic Interference",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10214": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "11014": {
+          "name": "Multi Control",
+          "cost": 250,
+          "statModifiers": {
+            "range": -25.0
+          },
+          "addedRoles": []
+        }
+      }
+    },
+    "15": {
+      "id": "15",
+      "name": "Arclight",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 20,
+        "height": 20
+      },
+      "range": 95,
+      "speed": 7,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear"],
+      "techs": {
+        "1815": {
+          "name": "Electromagnetic Shot",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3015": {
+          "name": "Armor Enhancement",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3115": {
+          "name": "Anti-Aircraft Ammunition",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": ["anti-air"]
+        },
+        "4515": {
+          "name": "Shockwave",
+          "cost": 250,
+          "statModifiers": {
+            "range": -5.0
+          },
+          "addedRoles": []
+        },
+        "10215": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10815": {
+          "name": "Elite Marksman",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10915": {
+          "name": "Charged Shot",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "16": {
+      "id": "16",
+      "name": "Phoenix",
+      "cost": 200,
+      "unlockCost": 50,
+      "tier": 200,
+      "footprint": {
+        "width": 40,
+        "height": 20
+      },
+      "range": 120,
+      "speed": 16,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["single-target", "anti-air"],
+      "techs": {
+        "216": {
+          "name": "Energy Shield",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1616": {
+          "name": "Jump Drive",
+          "cost": 100,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "1816": {
+          "name": "Electromagnetic Shot",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "2916": {
+          "name": "Quantum Reassembly",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10216": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10316": {
+          "name": "Launcher Overload",
+          "cost": 200,
+          "statModifiers": {
+            "range": -25.0
+          },
+          "addedRoles": []
+        },
+        "10816": {
+          "name": "Elite Marksman",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10916": {
+          "name": "Charged Shot",
+          "cost": 200,
+          "statModifiers": {
+            "range": -25.0
+          },
+          "addedRoles": []
+        }
+      }
+    },
+    "17": {
+      "id": "17",
+      "name": "War Factory",
+      "cost": 800,
+      "unlockCost": 350,
+      "tier": 800,
+      "footprint": {
+        "width": 70,
+        "height": 70
+      },
+      "range": 100,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["titan", "chaff-clear"],
+      "techs": {
+        "417": {
+          "name": "High-Explosive Ammo",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3017": {
+          "name": "Armor Enhancement",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3317": {
+          "name": "Missile Interceptor",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": ["missile-interception"]
+        },
+        "3417": {
+          "name": "Efficient Maintenance",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10217": {
+          "name": "Range Enhancement",
+          "cost": 500,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10317": {
+          "name": "Launcher Overload",
+          "cost": 300,
+          "statModifiers": {
+            "range": -20.0
+          },
+          "addedRoles": []
+        },
+        "12017": {
+          "name": "Phoenix Production",
+          "cost": 500,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "12117": {
+          "name": "Steel Ball Production",
+          "cost": 450,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "12217": {
+          "name": "Sledgehammer Production",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180317": {
+          "name": "Photon Coating",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "18": {
+      "id": "18",
+      "name": "Wraith",
+      "cost": 300,
+      "unlockCost": 50,
+      "tier": 300,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 60,
+      "speed": 10,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["chaff-clear", "anti-air"],
+      "techs": {
+        "418": {
+          "name": "High-Explosive Ammo",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "918": {
+          "name": "Field Maintenance",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3018": {
+          "name": "Armor Enhancement",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4418": {
+          "name": "Land Cruiser",
+          "cost": 300,
+          "statModifiers": {
+            "range": 50.0
+          },
+          "addedRoles": []
+        },
+        "10218": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "110181": {
+          "name": "Floating Artillery Array",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180418": {
+          "name": "Degeneration Beam",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "19": {
+      "id": "19",
+      "name": "Scorpion",
+      "cost": 300,
+      "unlockCost": 50,
+      "tier": 300,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 100,
+      "speed": 7,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["single-target", "chaff-clear"],
+      "techs": {
+        "719": {
+          "name": "Doubleshot",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "919": {
+          "name": "Field Maintenance",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3019": {
+          "name": "Armor Enhancement",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10019": {
+          "name": "Siege Mode",
+          "cost": 300,
+          "statModifiers": {
+            "range": 100.0
+          },
+          "addedRoles": ["siege"]
+        },
+        "10219": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10419": {
+          "name": "Convergent Fire",
+          "cost": 100,
+          "statModifiers": {
+            "range": 30.0
+          },
+          "addedRoles": []
+        },
+        "180519": {
+          "name": "Acid Attack",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "20": {
+      "id": "20",
+      "name": "Fire Badger",
+      "cost": 200,
+      "unlockCost": 0,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 75,
+      "speed": 9,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear"],
+      "techs": {
+        "820": {
+          "name": "Napalm",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "920": {
+          "name": "Field Maintenance",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10220": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10620": {
+          "name": "Scorching Fire",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "11020": {
+          "name": "Scorching Charge",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180220": {
+          "name": "Ignite",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180620": {
+          "name": "Counter-Fire",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "21": {
+      "id": "21",
+      "name": "Sabertooth",
+      "cost": 200,
+      "unlockCost": 0,
+      "tier": 200,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 95,
+      "speed": 8,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["single-target", "chaff-clear"],
+      "techs": {
+        "721": {
+          "name": "Doubleshot",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3321": {
+          "name": "Missile Interceptor",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": ["missile-interception"]
+        },
+        "4721": {
+          "name": "Field Entrenchment ",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10221": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10321": {
+          "name": "Field Maintenance",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "110211": {
+          "name": "Secondary Armament",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "110212": {
+          "name": "Anti-Air Missile",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "22": {
+      "id": "22",
+      "name": "Typhoon",
+      "cost": 300,
+      "unlockCost": 50,
+      "tier": 300,
+      "footprint": {
+        "width": 40,
+        "height": 20
+      },
+      "range": 100,
+      "speed": 9,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["chaff-clear", "anti-air"],
+      "techs": {
+        "1022": {
+          "name": "Barrier",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "2922": {
+          "name": "Field Reassembly",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3022": {
+          "name": "Mechanical Rage",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3222": {
+          "name": "Aerial Specialization",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4722": {
+          "name": "Field Entrenchment ",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "5122": {
+          "name": "Reactive Armor",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "5222": {
+          "name": "Maintenance Array",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "5322": {
+          "name": "Wreckage Detonation",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10222": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "11022": {
+          "name": "Homing Missile",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1102022": {
+          "name": "Air Defense Mark",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "23": {
+      "id": "23",
+      "name": "Sandworm",
+      "cost": 400,
+      "unlockCost": 200,
+      "tier": 400,
+      "footprint": {
+        "width": 40,
+        "height": 40
+      },
+      "range": 60,
+      "speed": 16,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["giant", "chaff-clear"],
+      "techs": {
+        "923": {
+          "name": "Burrow Maintenance",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3023": {
+          "name": "Armor Enhancement",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3123": {
+          "name": "Anti-Aerial",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": ["anti-air"]
+        },
+        "3623": {
+          "name": "Replicate",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3723": {
+          "name": "Sandstorm",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3823": {
+          "name": "Strike",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10523": {
+          "name": "Mechanical Rage",
+          "cost": 150,
+          "statModifiers": {
+            "speed": 5.0
+          },
+          "addedRoles": []
+        },
+        "13023": {
+          "name": "Mechanical Division",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "24": {
+      "id": "24",
+      "name": "Tarantula",
+      "cost": 200,
+      "unlockCost": 0,
+      "tier": 200,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 80,
+      "speed": 8,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear"],
+      "techs": {
+        "424": {
+          "name": "High-Explosive Ammo",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "924": {
+          "name": "Field Maintenance",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3024": {
+          "name": "Armor Enhancement",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3124": {
+          "name": "Anti-Aircraft Ammunition",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": ["anti-air"]
+        },
+        "10224": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10524": {
+          "name": "Mechanical Rage",
+          "cost": 400,
+          "statModifiers": {
+            "speed": 4.0
+          },
+          "addedRoles": []
+        },
+        "10624": {
+          "name": "Armor-Piercing Bullets",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "11024": {
+          "name": "Spider Mine",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "25": {
+      "id": "25",
+      "name": "Phantom Ray",
+      "cost": 200,
+      "unlockCost": 50,
+      "tier": 200,
+      "footprint": {
+        "width": 50,
+        "height": 20
+      },
+      "range": 65,
+      "speed": 16,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["single-target", "anti-air"],
+      "techs": {
+        "225": {
+          "name": "Energy Shield",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "425": {
+          "name": "High-Explosive Ammo",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "725": {
+          "name": "Burst Mode",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3025": {
+          "name": "Armor Enhancement",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3225": {
+          "name": "Ground Targeting",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3925": {
+          "name": "Stealth Cloak",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10225": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "11025": {
+          "name": "Sticky Oil Bomb",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "26": {
+      "id": "26",
+      "name": "Farseer",
+      "cost": 300,
+      "unlockCost": 50,
+      "tier": 300,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 125,
+      "speed": 16,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["single-target", "anti-air"],
+      "techs": {
+        "726": {
+          "name": "Burst Mode",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1826": {
+          "name": "Electromagnetic Explosion",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3226": {
+          "name": "Aerial Specialization",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3326": {
+          "name": "Missile Interceptor",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": ["missile-interception"]
+        },
+        "10226": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "180326": {
+          "name": "Photon Emission",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180526": {
+          "name": "Scanning Radar",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "27": {
+      "id": "27",
+      "name": "Raiden",
+      "cost": 400,
+      "unlockCost": 200,
+      "tier": 400,
+      "footprint": {
+        "width": 40,
+        "height": 40
+      },
+      "range": 110,
+      "speed": 10,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["giant", "chaff-clear", "anti-air"],
+      "techs": {
+        "227": {
+          "name": "Energy Shield",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "1827": {
+          "name": "Electromagnetic Shot",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4027": {
+          "name": "Chain",
+          "cost": 200,
+          "statModifiers": {
+            "range": -20.0
+          },
+          "addedRoles": []
+        },
+        "4127": {
+          "name": "Ionization",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10227": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "110271": {
+          "name": "Fork",
+          "cost": 250,
+          "statModifiers": {
+            "range": -10.0
+          },
+          "addedRoles": []
+        }
+      }
+    },
+    "28": {
+      "id": "28",
+      "name": "Hound",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 40,
+        "height": 20
+      },
+      "range": 70,
+      "speed": 10,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff", "chaff-clear"],
+      "techs": {
+        "3028": {
+          "name": "Armor Enhancement",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4228": {
+          "name": "Fire Extinguisher",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10228": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10528": {
+          "name": "Mechanical Rage",
+          "cost": 300,
+          "statModifiers": {
+            "speed": 4.0
+          },
+          "addedRoles": []
+        },
+        "11028": {
+          "name": "Incendiary Bomb",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180828": {
+          "name": "Chamber Compression",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "29": {
+      "id": "29",
+      "name": "Abyss",
+      "cost": 800,
+      "unlockCost": 350,
+      "tier": 800,
+      "footprint": {
+        "width": 70,
+        "height": 70
+      },
+      "range": 100,
+      "speed": 10,
+      "isAir": true,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["titan", "chaff-clear", "anti-air"],
+      "techs": {
+        "2329": {
+          "name": "Wreckage Recycling",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "3429": {
+          "name": "Efficient Maintenance",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4329": {
+          "name": "Vertical Sweep",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10229": {
+          "name": "Range Enhancement",
+          "cost": 500,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10299": {
+          "name": "Range Enhancement",
+          "cost": null,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "11029": {
+          "name": "Disintegration",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "12029": {
+          "name": "Dark Companion",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "110291": {
+          "name": "Swarm Missiles",
+          "cost": 500,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180329": {
+          "name": "Photon Coating",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "30": {
+      "id": "30",
+      "name": "Void Eye",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 40,
+        "height": 20
+      },
+      "range": 100,
+      "speed": 8,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["single-target"],
+      "techs": {
+        "230": {
+          "name": "Energy Shield",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "330": {
+          "name": "Energy Absorption",
+          "cost": 50,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4430": {
+          "name": "Aerial Mode",
+          "cost": 150,
+          "statModifiers": {
+            "range": -15.0,
+            "speed": 3.0
+          },
+          "addedRoles": []
+        },
+        "10230": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "10930": {
+          "name": "Charged Shot",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180430": {
+          "name": "Suppression Shots",
+          "cost": 150,
+          "statModifiers": {
+            "range": 10.0
+          },
+          "addedRoles": []
+        },
+        "180530": {
+          "name": "Electromagnetic Armor",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "31": {
+      "id": "31",
+      "name": "Vortex",
+      "cost": 100,
+      "unlockCost": 0,
+      "tier": 100,
+      "footprint": {
+        "width": 20,
+        "height": 20
+      },
+      "range": 85,
+      "speed": 8,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["chaff-clear"],
+      "techs": {
+        "631": {
+          "name": "Grid Integration",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "931": {
+          "name": "Field Maintenance",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "4531": {
+          "name": "Electromagnetic Cloud",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10131": {
+          "name": "Machine Learning",
+          "cost": 50,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10231": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "123101": {
+          "name": "Electromagnetic Twin",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "180931": {
+          "name": "Mobile Power Station",
+          "cost": 250,
+          "statModifiers": {
+            "range": 10.0
+          },
+          "addedRoles": []
+        },
+        "493101": {
+          "name": "Accumulator Shield",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "503101": {
+          "name": "Emergency Armor",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "32": {
+      "id": "32",
+      "name": "Centurion",
+      "cost": 300,
+      "unlockCost": 50,
+      "tier": 300,
+      "footprint": {
+        "width": 30,
+        "height": 30
+      },
+      "range": 110,
+      "speed": 10,
+      "isAir": false,
+      "canTargetAir": true,
+      "canTargetGround": true,
+      "roles": ["single-target", "anti-air"],
+      "techs": {
+        "1232": {
+          "name": "Summon Hounds",
+          "cost": 200,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "5132": {
+          "name": "Reactive Armor",
+          "cost": 150,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "5532": {
+          "name": "Melee Mode",
+          "cost": 100,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "10232": {
+          "name": "Range Enhancement",
+          "cost": 300,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "110321": {
+          "name": "Dual Wield",
+          "cost": 300,
+          "statModifiers": {
+            "range": -25.0
+          },
+          "addedRoles": []
+        },
+        "110322": {
+          "name": "Homing Missile",
+          "cost": 250,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    },
+    "2002": {
+      "id": "2002",
+      "name": "Mountain",
+      "cost": 800,
+      "unlockCost": 350,
+      "tier": 800,
+      "footprint": {
+        "width": 70,
+        "height": 70
+      },
+      "range": 100,
+      "speed": 6,
+      "isAir": false,
+      "canTargetAir": false,
+      "canTargetGround": true,
+      "roles": ["titan", "chaff-clear"],
+      "techs": {
+        "72002": {
+          "name": "Saturation Bombardment",
+          "cost": 500,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "302002": {
+          "name": "Mountain Plating",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "312002": {
+          "name": "Anti-Aircraft Ammunition",
+          "cost": 300,
+          "statModifiers": {},
+          "addedRoles": ["anti-air"]
+        },
+        "1022002": {
+          "name": "Range Enhancement",
+          "cost": 500,
+          "statModifiers": {
+            "range": 40.0
+          },
+          "addedRoles": []
+        },
+        "1032002": {
+          "name": "Extended Range Ammo",
+          "cost": 400,
+          "statModifiers": {
+            "range": 160.0
+          },
+          "addedRoles": []
+        },
+        "11020021": {
+          "name": "Gun-launched Missile",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "11020022": {
+          "name": "Smoke Bomb",
+          "cost": 350,
+          "statModifiers": {},
+          "addedRoles": []
+        },
+        "18032002": {
+          "name": "Photon Loop",
+          "cost": 400,
+          "statModifiers": {},
+          "addedRoles": []
+        }
+      }
+    }
+  },
+  "spells": {
+    "100002": {
+      "name": "Incendiary Bomb",
+      "cost": 100
+    },
+    "200001": {
+      "name": "Electromagnetic Impact",
+      "cost": 50
+    },
+    "200002": {
+      "name": "Electromagnetic Blast",
+      "cost": 200
+    },
+    "200003": {
+      "name": "Photon Emission",
+      "cost": 100
+    },
+    "300001": {
+      "name": "Missile Strike",
+      "cost": 50
+    },
+    "300003": {
+      "name": "Orbital Bombardment",
+      "cost": 150
+    },
+    "300004": {
+      "name": "Nuke",
+      "cost": 250
+    },
+    "300005": {
+      "name": "Lightning Storm",
+      "cost": 250
+    },
+    "300006": {
+      "name": "Ion Blast",
+      "cost": 200
+    },
+    "300007": {
+      "name": "Orbital Javelin",
+      "cost": 200
+    },
+    "300016": {
+      "name": "Heavy missile strike",
+      "cost": null
+    },
+    "400002": {
+      "name": "Sticky Oil Bomb",
+      "cost": null
+    },
+    "400003": {
+      "name": "Sticky Oil Bomb Spell",
+      "cost": null
+    },
+    "500002": {
+      "name": "Acid Blast",
+      "cost": 100
+    },
+    "600002": {
+      "name": "Smoke Bomb",
+      "cost": 100
+    },
+    "800001": {
+      "name": "Shield Airdrop",
+      "cost": 50
+    },
+    "900001": {
+      "name": "Field Recovery",
+      "cost": null
+    },
+    "1000001": {
+      "name": "Redeployment",
+      "cost": 50
+    },
+    "1100001": {
+      "name": "Intensive Training",
+      "cost": 50
+    },
+    "1200001": {
+      "name": "Underground Threat",
+      "cost": 50
+    },
+    "1200002": {
+      "name": "Rhino Assault",
+      "cost": 50
+    },
+    "1200003": {
+      "name": "Wasp Swarm",
+      "cost": 50
+    },
+    "1200004": {
+      "name": "Mobilize Battleship",
+      "cost": 250
+    },
+    "1200005": {
+      "name": "Vulcan's Descent",
+      "cost": 200
+    },
+    "1500001": {
+      "name": "Mobile Beacon",
+      "cost": null
+    },
+    "1500002": {
+      "name": "Mobile Beacon",
+      "cost": 0
+    }
+  },
+  "specialists": {
+    "10001": {
+      "name": "Quick Cooldown",
+      "cost": null
+    },
+    "10002": {
+      "name": "Supply Specialist",
+      "cost": null
+    },
+    "10003": {
+      "name": "Super Supply Enhancement",
+      "cost": 250
+    },
+    "10004": {
+      "name": "Additional Deployment Slot",
+      "cost": 100
+    },
+    "10007": {
+      "name": "Advanced Shield Device",
+      "cost": 0
+    },
+    "10008": {
+      "name": "Advanced Missile Device",
+      "cost": 0
+    },
+    "10009": {
+      "name": "Quick Teleport",
+      "cost": 0
+    },
+    "10010": {
+      "name": "Quick Supply Specialist",
+      "cost": null
+    },
+    "10011": {
+      "name": "Missile Specialist",
+      "cost": null
+    },
+    "10013": {
+      "name": "Amplify Specialist",
+      "cost": null
+    },
+    "10014": {
+      "name": "Training Specialist",
+      "cost": null
+    },
+    "10015": {
+      "name": "Secondary Equipment Expert",
+      "cost": null
+    },
+    "10524": {
+      "name": "Mass-produced laser sight",
+      "cost": 100
+    },
+    "10525": {
+      "name": "Mass Production Fire Control System",
+      "cost": 100
+    },
+    "10526": {
+      "name": "Mass Production Heavy Armor",
+      "cost": 100
+    },
+    "10540": {
+      "name": "Equipment Expansion",
+      "cost": 100
+    },
+    "20001": {
+      "name": "Advanced Defensive Tactics",
+      "cost": 300
+    },
+    "20002": {
+      "name": "Advanced Offensive Tactics",
+      "cost": 350
+    },
+    "20003": {
+      "name": "Efficient Tech Research",
+      "cost": 100
+    },
+    "20004": {
+      "name": "Advanced Power System",
+      "cost": 100
+    },
+    "20005": {
+      "name": "Giant Specialist",
+      "cost": null
+    },
+    "20006": {
+      "name": "Advanced Targeting System",
+      "cost": 400
+    },
+    "20007": {
+      "name": "Supply Enhancement",
+      "cost": 100
+    },
+    "20021": {
+      "name": "Aerial Specialist",
+      "cost": null
+    },
+    "20022": {
+      "name": "Efficient Giant Manufacturing",
+      "cost": 100
+    },
+    "20023": {
+      "name": "Efficient Light Manufacturing",
+      "cost": 300
+    },
+    "20024": {
+      "name": "Speed Specialist",
+      "cost": null
+    },
+    "20029": {
+      "name": "Marksman Specialist",
+      "cost": null
+    },
+    "20032": {
+      "name": "Elite Specialist",
+      "cost": null
+    },
+    "20033": {
+      "name": "Rhino Specialist",
+      "cost": null
+    },
+    "20034": {
+      "name": "Cost Control Specialist",
+      "cost": null
+    },
+    "20035": {
+      "name": "Fortified Specialist",
+      "cost": null
+    },
+    "20036": {
+      "name": "Sabertooth Specialist",
+      "cost": null
+    },
+    "20037": {
+      "name": "Farseer Specialist",
+      "cost": null
+    },
+    "20038": {
+      "name": "Fire Badger Specialist",
+      "cost": null
+    },
+    "20039": {
+      "name": "Typhoon Specialist",
+      "cost": null
+    },
+    "30101": {
+      "name": "Mass-Produced Fortress",
+      "cost": 50
+    },
+    "30102": {
+      "name": "Assault Fortress",
+      "cost": 50
+    },
+    "30104": {
+      "name": "Improved Fortress",
+      "cost": 0
+    },
+    "30105": {
+      "name": "Extended Range Fortress",
+      "cost": 0
+    },
+    "30201": {
+      "name": "Extended Range Marksman",
+      "cost": 50
+    },
+    "30202": {
+      "name": "Smart Marksman",
+      "cost": 0
+    },
+    "30203": {
+      "name": "Subsidized Marksman",
+      "cost": 100
+    },
+    "30204": {
+      "name": "Elite Marksman",
+      "cost": 0
+    },
+    "30301": {
+      "name": "Extended Range Vulcan",
+      "cost": 50
+    },
+    "30302": {
+      "name": "Assault Vulcan",
+      "cost": 0
+    },
+    "30401": {
+      "name": "Assault Melting Point",
+      "cost": 0
+    },
+    "30402": {
+      "name": "Improved Melting Point",
+      "cost": 0
+    },
+    "30403": {
+      "name": "Mass-Produced Melting Point",
+      "cost": 0
+    },
+    "30501": {
+      "name": "Mass-Produced Rhino",
+      "cost": 0
+    },
+    "30502": {
+      "name": "Berserk Rhino",
+      "cost": 0
+    },
+    "30503": {
+      "name": "Elite Rhino",
+      "cost": 0
+    },
+    "30601": {
+      "name": "Mass-Produced Wasp",
+      "cost": 0
+    },
+    "30602": {
+      "name": "Improved Wasp",
+      "cost": 50
+    },
+    "30604": {
+      "name": "Elite Wasp",
+      "cost": 0
+    },
+    "30701": {
+      "name": "Subsidized Mustang",
+      "cost": 100
+    },
+    "30702": {
+      "name": "Fortified Mustang",
+      "cost": 50
+    },
+    "30703": {
+      "name": "Elite Mustang",
+      "cost": 0
+    },
+    "30801": {
+      "name": "Subsidized Steel Ball",
+      "cost": 100
+    },
+    "30803": {
+      "name": "Improved Steel Ball",
+      "cost": 0
+    },
+    "30804": {
+      "name": "Elite Steel Ball",
+      "cost": 0
+    },
+    "30901": {
+      "name": "Elite Fang",
+      "cost": 0
+    },
+    "30902": {
+      "name": "Assault Fang",
+      "cost": 0
+    },
+    "31001": {
+      "name": "Subsidized Crawler",
+      "cost": 100
+    },
+    "31002": {
+      "name": "Elite Crawler",
+      "cost": 0
+    },
+    "31101": {
+      "name": "Fortified Overlord",
+      "cost": 0
+    },
+    "31102": {
+      "name": "Mass-Produced Overlord",
+      "cost": 0
+    },
+    "31104": {
+      "name": "Improved Overlord",
+      "cost": 50
+    },
+    "31201": {
+      "name": "Assault Stormcaller",
+      "cost": 0
+    },
+    "31202": {
+      "name": "Extended Range Stormcaller",
+      "cost": 50
+    },
+    "31203": {
+      "name": "Subsidized Stormcaller",
+      "cost": 50
+    },
+    "31205": {
+      "name": "Elite Stormcaller",
+      "cost": 0
+    },
+    "31301": {
+      "name": "Mass-Produced Sledgehammer",
+      "cost": 0
+    },
+    "31302": {
+      "name": "Extended Range Sledgehammer",
+      "cost": 0
+    },
+    "31304": {
+      "name": "Improved Sledgehammer",
+      "cost": 0
+    },
+    "31305": {
+      "name": "Elite Sledgehammer",
+      "cost": 0
+    },
+    "31402": {
+      "name": "Fortified Hacker",
+      "cost": 0
+    },
+    "31403": {
+      "name": "Elite Hacker",
+      "cost": 0
+    },
+    "31501": {
+      "name": "Subsidized Arclight",
+      "cost": 100
+    },
+    "31502": {
+      "name": "Smart Arclight",
+      "cost": 0
+    },
+    "31503": {
+      "name": "Fortified Arclight",
+      "cost": 100
+    },
+    "31504": {
+      "name": "Extended Range Arclight",
+      "cost": 50
+    },
+    "31505": {
+      "name": "Elite Arclight",
+      "cost": 0
+    },
+    "31601": {
+      "name": "Mass-Produced Phoenix",
+      "cost": 0
+    },
+    "31602": {
+      "name": "Extended Range Phoenix",
+      "cost": 0
+    },
+    "31603": {
+      "name": "Improved Phoenix",
+      "cost": 0
+    },
+    "31604": {
+      "name": "Elite Phoenix",
+      "cost": 0
+    },
+    "31701": {
+      "name": "Extended Range War Factory",
+      "cost": 0
+    },
+    "31702": {
+      "name": "Improved War Factory",
+      "cost": 0
+    },
+    "31801": {
+      "name": "Mass-Produced Wraith",
+      "cost": 0
+    },
+    "31802": {
+      "name": "Improved Wraith",
+      "cost": 0
+    },
+    "31901": {
+      "name": "Assault Scorpion",
+      "cost": 50
+    },
+    "31902": {
+      "name": "Mass-Produced Scorpion",
+      "cost": 0
+    },
+    "31903": {
+      "name": "Improved Scorpion",
+      "cost": 0
+    },
+    "32101": {
+      "name": "Extended Range Sabertooth",
+      "cost": 0
+    },
+    "32102": {
+      "name": "Mass-Produced Sabertooth",
+      "cost": 0
+    },
+    "32103": {
+      "name": "Improved Sabertooth",
+      "cost": 0
+    },
+    "32301": {
+      "name": "Improved Sandworm",
+      "cost": 0
+    },
+    "32302": {
+      "name": "Mass-Produced Sandworm",
+      "cost": 0
+    },
+    "32401": {
+      "name": "Improved Tarantula",
+      "cost": 0
+    },
+    "32402": {
+      "name": "Elite Tarantula",
+      "cost": 0
+    },
+    "32501": {
+      "name": "Extended Range Phantom Ray",
+      "cost": 0
+    },
+    "32601": {
+      "name": "Mass-Produced Farseer",
+      "cost": 0
+    },
+    "32602": {
+      "name": "Fortified Farseer",
+      "cost": 0
+    },
+    "32701": {
+      "name": "Assault Raiden",
+      "cost": 0
+    },
+    "32801": {
+      "name": "Strike Hound",
+      "cost": 0
+    },
+    "33001": {
+      "name": "Improved Void Eye",
+      "cost": 0
+    }
+  },
+  "items": {
+    "1305001": {
+      "name": "Charged Ammo",
+      "cost": null
+    },
+    "1305002": {
+      "name": "Parasitic Ammo",
+      "cost": null
+    },
+    "1305003": {
+      "name": "Photon Coating",
+      "cost": 0
+    },
+    "1306001": {
+      "name": "Tank Production Line",
+      "cost": 200
+    },
+    "1306002": {
+      "name": "Mustang Production Line",
+      "cost": 200
+    },
+    "1306003": {
+      "name": "Steel Ball Production Line",
+      "cost": 200
+    },
+    "1307001": {
+      "name": "Barrier",
+      "cost": 100
+    },
+    "1308001": {
+      "name": "Anti-Interference Module",
+      "cost": 0
+    },
+    "1309001": {
+      "name": "Absorption Module",
+      "cost": 100
+    },
+    "13010001": {
+      "name": "Portable Shield",
+      "cost": 150
+    },
+    "13020001": {
+      "name": "Nano Repair Kit",
+      "cost": 100
+    },
+    "13030001": {
+      "name": "Laser Sights",
+      "cost": 50
+    },
+    "13030002": {
+      "name": "Heavy Armor",
+      "cost": 50
+    },
+    "13030003": {
+      "name": "Improved Firepower Control System",
+      "cost": 50
+    },
+    "13030004": {
+      "name": "Enhancement Module",
+      "cost": 200
+    },
+    "13030005": {
+      "name": "Haste Module",
+      "cost": 0
+    },
+    "13030006": {
+      "name": "Super Heavy Armor",
+      "cost": 200
+    },
+    "13030007": {
+      "name": "Amplifying Core",
+      "cost": 150
+    },
+    "13030008": {
+      "name": "Advanced Firepower Control System",
+      "cost": null
+    },
+    "13030009": {
+      "name": "Small Amplifying Core",
+      "cost": null
+    },
+    "13030010": {
+      "name": "Dominion Core",
+      "cost": 100
+    },
+    "13030521": {
+      "name": "Secondary Laser Sight",
+      "cost": null
+    },
+    "13030522": {
+      "name": "Secondary Fire Control System",
+      "cost": null
+    },
+    "13030523": {
+      "name": "Secondary Heavy Armor",
+      "cost": null
+    },
+    "13040001": {
+      "name": "Deployment Module",
+      "cost": 0
+    },
+    "13150101": {
+      "name": "Explosive Ammo",
+      "cost": 100
+    }
+  },
+  "devices": {
+    "10001": {
+      "name": "Shield Generator",
+      "cost": 100
+    },
+    "20001": {
+      "name": "Sentry Missile",
+      "cost": 50
+    },
+    "30001": {
+      "name": "Missile Interceptor",
+      "cost": 100
+    }
+  },
+  "towers": {
+    "1": {
+      "name": "Rapid Resupply",
+      "cost": 0
+    },
+    "3": {
+      "name": "Mass Recruitment",
+      "cost": 50
+    },
+    "4": {
+      "name": "Elite Recruitment",
+      "cost": 100
+    },
+    "5": {
+      "name": "Enhanced Range",
+      "cost": 100
+    },
+    "6": {
+      "name": "High Mobility",
+      "cost": 50
+    }
+  },
+  "blueprints": {
+    "1": {
+      "name": "Sticky Oil Bomb",
+      "cost": 150
+    },
+    "2": {
+      "name": "Field Recovery",
+      "cost": 100
+    },
+    "3": {
+      "name": "Mobile Beacon",
+      "cost": 100
+    },
+    "4": {
+      "name": "Attack Enhancement",
+      "cost": 100
+    },
+    "5": {
+      "name": "Defense Enhancement",
+      "cost": 100
+    },
+    "401": {
+      "name": "Attack Enhancement II",
+      "cost": 300
+    },
+    "501": {
+      "name": "Defense Enhancement II",
+      "cost": 300
+    }
+  }
+}
