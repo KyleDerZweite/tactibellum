@@ -7,6 +7,9 @@ import {
   researchCosts,
 } from "./metrics/economy";
 
+export const ruleSupportNote =
+  "Rule findings are available for two-player 1v1 replays.";
+
 export function analysisRounds(snapshot: MatchSnapshotV1) {
   return snapshot.rounds
     .filter((round) => round.roundNumber > 0)

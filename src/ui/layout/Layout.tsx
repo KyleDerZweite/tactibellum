@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 import { useWorkspace } from "../workspace/store";
 import type { ReplayView } from "../workspace/store";
 
-const upcomingViews = ["Economy & Graphs", "Rule Findings"];
-
 const views: [ReplayView, string][] = [
   ["overview", "Overview"],
   ["board", "Tactical Board"],
+  ["charts", "Economy & Graphs"],
+  ["findings", "Rule Findings"],
   ["action-log", "Action Log"],
   ["raw-json", "Raw JSON"],
 ];
@@ -68,7 +68,7 @@ export function Layout({ children, replayName, patch }: LayoutProps) {
           {replayName ?? "No replay selected"}
           {patch && ` · Patch ${patch}`}
         </span>
-        {view === "board" && replayName && (
+        {view !== "overview" && replayName && (
           <a
             className="board-change-replay"
             href="#replay-upload"
@@ -116,12 +116,6 @@ export function Layout({ children, replayName, patch }: LayoutProps) {
                   ) : (
                     label
                   )}
-                </li>
-              ))}
-              {upcomingViews.map((view) => (
-                <li className="unavailable-view" key={view}>
-                  {view}
-                  <span className="sr-only"> (coming soon)</span>
                 </li>
               ))}
             </ul>

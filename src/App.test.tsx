@@ -90,4 +90,35 @@ describe("replay workspace", () => {
     expect(useWorkspace.getState().match?.rounds).toHaveLength(9);
     expect(useWorkspace.getState().selectedRound).toBe(1);
   });
+
+  it("opens a finding on its board round and keeps the views synchronized", async () => {
+    const { container } = render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "Try demo match" }));
+    await screen.findByRole("heading", { name: "Tactical Board" });
+    fireEvent.click(screen.getByRole("link", { name: "Rule Findings" }));
+    fireEvent.change(screen.getByRole("combobox", { name: "Round" }), {
+      target: { value: "4" },
+    });
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /show on board: energy tower exposed on the world right, round 4, quartz/i,
+      }),
+    );
+    expect(screen.getByRole("heading", { name: "Round 4" })).toBeTruthy();
+    expect(container.querySelector(".board-region")).toBeTruthy();
+    expect(
+      screen
+        .getByRole("button", { name: /Overlord #5/ })
+        .getAttribute("data-highlighted"),
+    ).toBe("true");
+
+    fireEvent.keyDown(document.body, { key: "ArrowRight" });
+    expect(container.querySelector(".board-region")).toBeNull();
+    fireEvent.click(screen.getByRole("link", { name: "Rule Findings" }));
+    expect(
+      screen.getByRole<HTMLSelectElement>("combobox", {
+        name: "Round",
+      }).value,
+    ).toBe("5");
+  });
 });

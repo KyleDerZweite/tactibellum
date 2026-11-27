@@ -3,7 +3,12 @@ import type { MatchSnapshotV1 } from "../contracts/match";
 import type { PatchData } from "../contracts/patch";
 import { boardSide, hasStandardBoard } from "../geometry";
 import { spatialMetrics } from "./metrics/spatial";
-import { analysisRounds, playerRounds, supportsRules } from "./rounds";
+import {
+  analysisRounds,
+  playerRounds,
+  ruleSupportNote,
+  supportsRules,
+} from "./rounds";
 import { AntiAirGapRule } from "./rules/anti-air-gap";
 import { ChaffRatioRule } from "./rules/chaff-ratio";
 import { DeploymentWasteRule } from "./rules/deployment-waste";
@@ -65,8 +70,7 @@ export function analyzeMatch(
     "Spatial values exclude unknown costs and unavailable or out-of-bounds coordinates. Spatial metrics require a standard 1v1 map and, for a nonempty board, at least one positioned friendly unit.",
     "Tower defense is unavailable if the opposing state is missing or all its units lack usable positions. Chaff depth is unavailable without positioned chaff. Partial positions can understate spatial values.",
   ];
-  if (!supportsRules(snapshot))
-    notes.push("Rule findings are available for two-player 1v1 replays.");
+  if (!supportsRules(snapshot)) notes.push(ruleSupportNote);
   else if (!standard)
     notes.push("Spatial metrics and findings are unavailable for this map.");
 

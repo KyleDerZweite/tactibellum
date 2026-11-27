@@ -1,0 +1,142 @@
+.analysis-charts {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.analysis-chart-card {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  padding: clamp(0.75rem, 3vw, 1.25rem);
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: var(--color-panel);
+}
+
+.analysis-chart-controls,
+.analysis-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.analysis-chart-controls label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.analysis-chart-controls select {
+  min-height: 2.5rem;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.375rem;
+  background: var(--color-raised);
+  color: var(--color-text);
+}
+
+.analysis-chart-card summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--color-accent);
+}
+
+.analysis-chart-formula p {
+  margin-top: 0.5rem;
+  max-width: 70ch;
+  color: var(--color-muted);
+}
+
+.analysis-chart-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.analysis-chart-key {
+  flex: 0 0 1.25rem;
+  border-top: 2px solid var(--color-accent);
+}
+
+.analysis-chart-key[data-series="1"] {
+  border-top-color: var(--color-opponent);
+  border-top-style: dashed;
+}
+
+.analysis-chart-plot {
+  min-width: 0;
+  height: clamp(14rem, 45vw, 22rem);
+}
+
+.analysis-chart-plot .recharts-cartesian-axis-tick-value,
+.analysis-chart-round-tick {
+  font: 0.75rem var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.analysis-chart-round-tick,
+.analysis-chart-point {
+  cursor: pointer;
+}
+
+.analysis-chart-round-tick:hover {
+  fill: var(--color-accent);
+}
+
+.analysis-chart-tooltip {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.375rem;
+  background: var(--color-raised);
+  font-size: 0.875rem;
+}
+
+.analysis-chart-empty,
+.analysis-chart-table caption {
+  color: var(--color-muted);
+}
+
+.analysis-chart-table table {
+  width: 100%;
+  margin-top: 0.5rem;
+  border-collapse: collapse;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+.analysis-chart-table caption {
+  text-align: start;
+  font-size: 0.875rem;
+  padding-block: 0.375rem;
+}
+
+.analysis-chart-table th,
+.analysis-chart-table td {
+  padding: 0.375rem;
+  border-bottom: 1px solid var(--color-line);
+  text-align: start;
+}
+
+.analysis-chart-table tbody {
+  font: 0.875rem var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.analysis-chart-table button {
+  min-height: 2rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.analysis-chart-table tr[data-selected="true"] {
+  background: var(--color-raised);
+  color: var(--color-accent);
+}

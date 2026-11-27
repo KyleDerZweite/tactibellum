@@ -1,21 +1,47 @@
-import { useRef, useState } from "react";
+import { lazy, Suspense, useMemo, useRef, useState } from "react";
+import { analyzeMatch } from "./core/analytics";
+import type { BoardHighlight } from "./core/contracts/board";
 import { MAX_REPLAY_BYTES, parseRawReplay } from "./core/parser";
 import { reconstructMatch } from "./core/state";
 import { TacticalBoard } from "./ui/board/TacticalBoard";
+import { RuleFindings } from "./ui/findings/RuleFindings";
 import { Layout } from "./ui/layout/Layout";
 import { ReplayUpload } from "./ui/upload/ReplayUpload";
 import { ActionLog, MatchOverview, RawJson } from "./ui/workspace/ReplayViews";
+import { WinnerControl } from "./ui/workspace/WinnerControl";
 import { patchFor } from "./ui/workspace/patches";
 import { useWorkspace, type ReplayView } from "./ui/workspace/store";
 
+const AnalysisCharts = lazy(() =>
+  import("./ui/charts/AnalysisCharts").then(({ AnalysisCharts }) => ({
+    default: AnalysisCharts,
+  })),
+);
+
 export function App() {
   const match = useWorkspace((state) => state.match);
+  const patch = useWorkspace((state) => state.patch);
   const view = useWorkspace((state) => state.view);
+  const selectedRound = useWorkspace((state) => state.selectedRound);
+  const boardHighlight = useWorkspace((state) => state.boardHighlight);
   const openMatch = useWorkspace((state) => state.openMatch);
+  const showBoardRound = useWorkspace((state) => state.showBoardRound);
+  const setWinner = useWorkspace((state) => state.setWinner);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const latestRequest = useRef(0);
   const replayName = match?.meta.fileName;
+  const analysisView = view === "charts" || view === "findings";
+  const report = useMemo(
+    () =>
+      analysisView && match && patch ? analyzeMatch(match, patch) : undefined,
+    [analysisView, match, patch],
+  );
+
+  function goToRound(roundNumber: number, highlight?: BoardHighlight) {
+    showBoardRound(roundNumber, highlight);
+    document.getElementById("main")?.focus();
+  }
 
   async function load(
     fileName: string,
@@ -46,16 +72,39 @@ export function App() {
   return (
     <Layout replayName={replayName} patch={match?.meta.gameVersion}>
       {view === "board" && match ? (
-        <TacticalBoard />
+        <TacticalBoard highlight={boardHighlight} />
       ) : view === "action-log" && match ? (
         <ActionLog match={match} />
       ) : view === "raw-json" && match ? (
         <RawJson match={match} />
+      ) : view === "charts" && match && report ? (
+        <Suspense fallback={<p role="status">Loading graphs…</p>}>
+          <AnalysisCharts
+            match={match}
+            report={report}
+            selectedRound={selectedRound}
+            onGoToRound={goToRound}
+          />
+        </Suspense>
+      ) : view === "findings" && match && report ? (
+        <RuleFindings
+          match={match}
+          report={report}
+          selectedRound={selectedRound}
+          onGoToFinding={({ roundNumber, highlight }) =>
+            goToRound(roundNumber, highlight)
+          }
+        />
       ) : (
         <>
           <h1>{match ? "Overview" : "Open a replay"}</h1>
           {match ? (
-            <MatchOverview match={match} />
+            <>
+              <MatchOverview match={match} />
+              <div className="replay-section">
+                <WinnerControl meta={match.meta} onWinnerChange={setWinner} />
+              </div>
+            </>
           ) : (
             <p className="intro">
               Choose a replay saved by Mechabellum to open it in your browser.

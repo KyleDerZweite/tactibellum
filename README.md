@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Status: WIP](https://img.shields.io/badge/status-WIP-orange)](PROJECT_SPEC.md)
 
-Tactibellum is a browser-based replay workspace for Mechabellum. Choose or drop a local `.grbr` file. Replay files stay on your device. The [project spec](PROJECT_SPEC.md) outlines replay analysis and the demo.
+Tactibellum opens Mechabellum `.grbr` replays in your browser. Inspect deployment rounds on an SVG board, compare economy and positioning, and jump from a chart or rule finding to the board. Replay files stay on your device. [Open Tactibellum on GitHub Pages](https://kylederzweite.github.io/tactibellum/).
 
 ## Development
 
@@ -47,7 +47,7 @@ Tactibellum is an unofficial fan project. It has no affiliation with or endorsem
 
 ## Replay format and fixtures
 
-Choose or drop one `.grbr` file, or use **Try demo match**. **Action Log** shows ordered deployment actions for the selected round. **Raw JSON** shows the reconstructed snapshot and can display the source action records, including unsupported actions. Its pull request template contains patch and catalog IDs. It omits player names and replay contents.
+Choose or drop one `.grbr` file, or use **Try demo match**. Browse rounds with the arrow keys on the board. Select a chart round or **Show on board** in Rule Findings to jump to that round. Use **Overview** to record the winner manually. **Action Log** shows ordered deployment actions. **Raw JSON** shows the reconstructed snapshot or the source records. Its unknown ID template contains patch and catalog IDs and omits player names.
 
 - [Flank pressure](fixtures/replays/flank-pressure.grbr) and [Unknown and empty](fixtures/replays/unknown-and-empty.grbr) are synthetic. The first is a nine-round demo. The second exercises empty rounds, unknown IDs and missing placement. [Reference 2340](fixtures/replays/reference-2340.grbr) contains the first two real deployment rounds of an [upstream capture](https://github.com/jtk18/mechabellum-rs/blob/cbb6445941a7ff6238486e8ccce51cf96dae2c05/crates/mechabellum/fixtures/battle_record_2340.xml). It keeps deployment records and uses replacement player names and IDs. See the [upstream MIT notice](fixtures/replays/LICENSE.jtk18.txt).
 - Verified with local copies of 1v1 builds 959, 1425, 2324 and 2340 on 2026-11-27. The reader accepts UTF-8 BattleRecord XML with an optional BOM and the observed native layout with binary data around the XML. The file limit is 8 MiB. The parser rejects invalid XML, DTDs, and entity declarations. Field references include the [MIT replay parser](https://github.com/ShotgunCrocodile/mechabellum_replay_parser) and [mechabellum-rs](https://github.com/jtk18/mechabellum-rs).
