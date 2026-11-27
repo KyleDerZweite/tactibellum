@@ -55,15 +55,27 @@ function own<T>(
   return record && Object.hasOwn(record, id) ? record[id] : undefined;
 }
 
+export function patchUnit(patch: PatchData | undefined, unitId: string) {
+  return own(patch?.units, unitId);
+}
+
+export function patchTech(
+  patch: PatchData | undefined,
+  unitId: string,
+  techId: string,
+) {
+  return own(patchUnit(patch, unitId)?.techs, techId);
+}
+
 export function loadPatchData(data: unknown): PatchData {
   return patchDataSchema.parse(data);
 }
 
 export function createGameCatalog(patch?: PatchData) {
   const unit = (id: string) =>
-    entry<PatchUnit>("unit", id, own(patch?.units, id));
+    entry<PatchUnit>("unit", id, patchUnit(patch, id));
   const tech = (unitId: string, id: string) =>
-    entry<PatchTech>("tech", id, own(own(patch?.units, unitId)?.techs, id));
+    entry<PatchTech>("tech", id, patchTech(patch, unitId, id));
   function lookup(kind: CatalogKind, id: string, unitId?: string) {
     switch (kind) {
       case "unit":
