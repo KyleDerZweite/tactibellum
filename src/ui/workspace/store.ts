@@ -3,7 +3,7 @@ import type { MatchSnapshotV1 } from "../../core/contracts/match";
 import type { PatchData } from "../../core/contracts/patch";
 import type { RawReplay } from "../../core/parser";
 
-export type ReplayView = "overview" | "action-log" | "raw-json";
+export type ReplayView = "overview" | "board" | "action-log" | "raw-json";
 
 interface Workspace {
   match?: MatchSnapshotV1;
@@ -15,6 +15,7 @@ interface Workspace {
     match: MatchSnapshotV1,
     raw: RawReplay,
     patch?: PatchData,
+    view?: ReplayView,
   ) => void;
   setView: (view: ReplayView) => void;
   selectRound: (roundNumber: number) => void;
@@ -22,12 +23,12 @@ interface Workspace {
 
 export const useWorkspace = create<Workspace>((set) => ({
   view: "overview",
-  openMatch: (match, raw, patch) =>
+  openMatch: (match, raw, patch, view = "overview") =>
     set({
       match,
       raw,
       patch,
-      view: "overview",
+      view,
       selectedRound: match.rounds[0]?.roundNumber,
     }),
   setView: (view) => set({ view }),

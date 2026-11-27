@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import { MAX_REPLAY_BYTES, parseRawReplay } from "./core/parser";
 import { reconstructMatch } from "./core/state";
+import { TacticalBoard } from "./ui/board/TacticalBoard";
 import { Layout } from "./ui/layout/Layout";
 import { ReplayUpload } from "./ui/upload/ReplayUpload";
 import { ActionLog, MatchOverview, RawJson } from "./ui/workspace/ReplayViews";
 import { patchFor } from "./ui/workspace/patches";
-import { useWorkspace } from "./ui/workspace/store";
+import { useWorkspace, type ReplayView } from "./ui/workspace/store";
 
 export function App() {
   const match = useWorkspace((state) => state.match);
@@ -19,6 +20,7 @@ export function App() {
   async function load(
     fileName: string,
     read: () => Promise<string | Uint8Array>,
+    destination?: ReplayView,
   ) {
     const request = ++latestRequest.current;
     setLoading(true);
@@ -28,7 +30,7 @@ export function App() {
       if (request !== latestRequest.current) return;
       const raw = parseRawReplay(input, fileName);
       const patch = patchFor(raw.version);
-      openMatch(reconstructMatch(raw, patch), raw, patch);
+      openMatch(reconstructMatch(raw, patch), raw, patch, destination);
     } catch (cause) {
       if (request === latestRequest.current)
         setError(
@@ -43,7 +45,9 @@ export function App() {
 
   return (
     <Layout replayName={replayName} patch={match?.meta.gameVersion}>
-      {view === "action-log" && match ? (
+      {view === "board" && match ? (
+        <TacticalBoard />
+      ) : view === "action-log" && match ? (
         <ActionLog match={match} />
       ) : view === "raw-json" && match ? (
         <RawJson match={match} />
@@ -62,11 +66,15 @@ export function App() {
             loading={loading}
             loadError={error}
             onDemoSelected={() =>
-              void load("flank-pressure.grbr", async () => {
-                const demo =
-                  await import("../fixtures/replays/flank-pressure.grbr?raw");
-                return demo.default;
-              })
+              void load(
+                "flank-pressure.grbr",
+                async () => {
+                  const demo =
+                    await import("../fixtures/replays/flank-pressure.grbr?raw");
+                  return demo.default;
+                },
+                "board",
+              )
             }
             onReplaySelected={(file) =>
               void load(file.name, async () => {

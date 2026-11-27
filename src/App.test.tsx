@@ -83,7 +83,9 @@ describe("replay workspace", () => {
     expect(useWorkspace.getState().match?.meta.fileName).toBe("first.grbr");
 
     fireEvent.click(screen.getByRole("button", { name: "Try demo match" }));
-    await screen.findByText("flank-pressure.grbr loaded.");
+    await screen.findByRole("heading", { name: "Tactical Board" });
+    fireEvent.click(screen.getByRole("link", { name: "Change replay" }));
+    expect(screen.getByText("flank-pressure.grbr loaded.")).toBeTruthy();
     expect(screen.getByRole("alert").textContent).toBe("");
     expect(useWorkspace.getState().match?.rounds).toHaveLength(9);
     expect(useWorkspace.getState().selectedRound).toBe(1);

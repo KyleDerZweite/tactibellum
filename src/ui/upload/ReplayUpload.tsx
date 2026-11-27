@@ -32,7 +32,12 @@ export function ReplayUpload({
   }
 
   return (
-    <section aria-label="Replay file" className="upload-panel">
+    <section
+      id="replay-upload"
+      aria-label="Replay file"
+      className="upload-panel"
+      tabIndex={-1}
+    >
       <div
         className="drop-area"
         data-dragging={dragging}

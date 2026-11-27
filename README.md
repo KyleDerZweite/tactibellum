@@ -2,10 +2,10 @@
 
 > **🚧 Work in Progress / Under Construction**
 
-[![CI](https://github.com/KyleDerZweite/tactibellum/actions/workflows/ci.yml/badge.svg)](https://github.com/KyleDerZweite/tactibellum/actions/workflows/ci.yml)
+[![CI](https://github.com/KyleDerZweite/tactibellum/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/KyleDerZweite/tactibellum/actions/workflows/ci.yml)
 [![GitHub Pages](https://github.com/KyleDerZweite/tactibellum/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/KyleDerZweite/tactibellum/actions/workflows/deploy-pages.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Status: WIP](https://img.shields.io/badge/status-WIP-amber)](PROJECT_SPEC.md)
+[![Status: WIP](https://img.shields.io/badge/status-WIP-orange)](PROJECT_SPEC.md)
 
 Tactibellum is a browser-based replay workspace for Mechabellum. Choose or drop a local `.grbr` file. Replay files stay on your device. The [project spec](PROJECT_SPEC.md) outlines replay analysis and the demo.
 

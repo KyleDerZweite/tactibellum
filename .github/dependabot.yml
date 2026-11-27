@@ -4,6 +4,10 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # typescript-eslint rejects the TypeScript 7.0 compiler API.
+      - dependency-name: typescript
+        versions: [">=7.0 <7.1"]
     groups:
       npm:
         patterns: ["*"]

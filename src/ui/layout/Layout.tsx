@@ -3,14 +3,11 @@ import type { ReactNode } from "react";
 import { useWorkspace } from "../workspace/store";
 import type { ReplayView } from "../workspace/store";
 
-const upcomingViews = [
-  "2D Tactical Board",
-  "Economy & Graphs",
-  "Rule Findings",
-];
+const upcomingViews = ["Economy & Graphs", "Rule Findings"];
 
 const views: [ReplayView, string][] = [
   ["overview", "Overview"],
+  ["board", "Tactical Board"],
   ["action-log", "Action Log"],
   ["raw-json", "Raw JSON"],
 ];
@@ -44,7 +41,7 @@ export function Layout({ children, replayName, patch }: LayoutProps) {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="topbar">
+      <header className="topbar" data-view={view}>
         <button
           className="menu-button"
           type="button"
@@ -71,6 +68,15 @@ export function Layout({ children, replayName, patch }: LayoutProps) {
           {replayName ?? "No replay selected"}
           {patch && ` · Patch ${patch}`}
         </span>
+        {view === "board" && replayName && (
+          <a
+            className="board-change-replay"
+            href="#replay-upload"
+            onClick={() => setView("overview")}
+          >
+            Change replay
+          </a>
+        )}
         <a
           className="source-link"
           href="https://github.com/KyleDerZweite/tactibellum"
@@ -128,7 +134,7 @@ export function Layout({ children, replayName, patch }: LayoutProps) {
           </div>
         </aside>
 
-        <main id="main" tabIndex={-1} className="main-content">
+        <main id="main" tabIndex={-1} className="main-content" data-view={view}>
           {children}
         </main>
       </div>
