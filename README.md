@@ -7,7 +7,15 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Status: WIP](https://img.shields.io/badge/status-WIP-orange)](PROJECT_SPEC.md)
 
-Tactibellum opens Mechabellum `.grbr` replays in your browser. Inspect deployment rounds on an SVG board, compare economy and positioning, and jump from a chart or rule finding to the board. Replay files stay on your device. [Open Tactibellum on GitHub Pages](https://kylederzweite.github.io/tactibellum/).
+Tactibellum is a Mechabellum analysis board and local replay viewer. Arrange mechs, check range and arrival timing, and share the setup. Open a `.grbr` replay to review deployment rounds, compare economy and positioning, or copy a round to the analysis board. Replay files stay on your device. [Open Tactibellum on GitHub Pages](https://kylederzweite.github.io/tactibellum/).
+
+## Analysis board
+
+Open **Analysis Board** to place units on the standard 1v1 map. Drag a unit or set its coordinates in the inspector. Set levels, techs, and equipment for each unit. To start from a replay, select **Edit this round in Analysis Board** in the replay viewer.
+
+- **Timing** estimates straight-line arrival and when a moving unit enters its range of the goal. The table compares arrival times to the first chaff unit or, when no chaff estimate is available, the first unit. The estimate uses map units and base movement, with supported range and speed effects.
+- **Damage breakpoints** report per-member damage, hits to kill, and time from first impact using the nominal attack interval. The bundled build `2.0.0.5.2340` supports 12 attacker types and all 33 unit types as targets. The inspector lists assumptions and unavailable effects. Data comes from a [pinned extraction of the game configuration](https://github.com/qbisi/mechcore/tree/c6326dae74da9542e03c34da0c0b8066be193ae6/config).
+- **Copy board link** puts unit types, placements, loadouts, and catalog version in a URL fragment. A recipient can open the same board without an account. The link contains no replay file, player identifiers, or replay history.
 
 ## Development
 

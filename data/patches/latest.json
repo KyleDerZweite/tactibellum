@@ -5,7 +5,12 @@
     "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/GAME_VERSION",
     "https://github.com/ShotgunCrocodile/mechabellum_replay_parser/tree/2cfa38123bcc33b8f2c68787342c6b754b6a36fe",
     "https://github.com/mechstats/mech-data/tree/ac0f0e833ff2a4ea89fa899582982dc661dd03a8/data/1.8.0.3",
-    "https://github.com/FogMoe/Mechabellum/blob/4d6379abbcd0cda30146dfc3749341876e4b8d25/src/mechabellum/collector/unit_catalog.py"
+    "https://github.com/FogMoe/Mechabellum/blob/4d6379abbcd0cda30146dfc3749341876e4b8d25/src/mechabellum/collector/unit_catalog.py",
+    "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/equipment_effects.yaml",
+    "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/technology_effects.yaml",
+    "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/docs/rules/unit_levels.md",
+    "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/docs/rules/combat.md",
+    "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/docs/rules/officer_effects.md"
   ],
   "notes": [
     "The catalog covers the 33 recruitable units in the 2.0.0.5.2340 Standard Versus data extracted by mechcore. Later builds and mode-specific or summoned units can contain additional IDs.",
@@ -15,7 +20,8 @@
     "Roles and addedRoles are Tactibellum heuristics. statModifiers records only verified flat additions to main attack range in metres and speed in metres per second. An empty map leaves other effects unspecified.",
     "Tech costs are base supply before the surcharge for previously researched techs. Legacy-only tech IDs retain their old names with null costs. Other null costs indicate that this catalog has no verified price for the entry.",
     "Specialists includes opening specialists and officer cards because both use officer IDs. Spell and item costs refer to reinforcement acquisition when applicable. Devices, tower skills, and blueprints use their respective action IDs and base supply costs.",
-    "The legacy MIT replay parser, the earlier mechstats extraction, and FogMoe’s unit lookup cross-check replay IDs. Balance values use the stated mechcore build. The catalog contains field facts and project-authored tags."
+    "The legacy MIT replay parser, the earlier mechstats extraction, and FogMoe’s unit lookup cross-check replay IDs. Balance values use the stated mechcore build. The catalog contains field facts and project-authored tags.",
+    "Combat HP and attack values describe one member at level 1. The level rule multiplies HP and damage by levels 1 through 9. Attack is available for verified single-hit main weapons only. An absent combatModifier marks an unmodeled selection. An empty combatModifier marks a verified effect outside stationary HP, damage and cadence. Rates preserve the extracted Q32.32 values."
   ],
   "units": {
     "1": {
@@ -71,7 +77,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10301": {
           "name": "Launcher Overload",
@@ -101,6 +108,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 43938,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/fortress.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "2": {
@@ -159,7 +171,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10402": {
           "name": "Quick Reload",
@@ -172,6 +185,15 @@
           "cost": 400,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 1622,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/marksman.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 2329,
+          "intervalSeconds": 3.1
         }
       }
     },
@@ -216,13 +238,17 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10603": {
           "name": "Scorching Fire",
           "cost": 300,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 0.8499999998603016
+          }
         },
         "11010": {
           "name": "Sticky Oil Bomb",
@@ -236,6 +262,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 30279,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/vulcan.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "4": {
@@ -293,8 +324,14 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         }
+      },
+      "combat": {
+        "hp": 30907,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/melting_point.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "5": {
@@ -370,6 +407,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 19297,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/rhino.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "6": {
@@ -433,13 +475,17 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10606": {
           "name": "Armor-Piercing Bullets",
           "cost": 100,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 0.5
+          }
         },
         "10806": {
           "name": "Elite Marksman",
@@ -452,6 +498,15 @@
           "cost": 100,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 311,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/wasp.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 202,
+          "intervalSeconds": 1.4
         }
       }
     },
@@ -502,13 +557,26 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10607": {
           "name": "Armor-Piercing Bullets",
           "cost": 250,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 0.5
+          }
+        }
+      },
+      "combat": {
+        "hp": 343,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/mustang.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 36,
+          "intervalSeconds": 0.4
         }
       }
     },
@@ -565,7 +633,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "180808": {
           "name": "Kinetic Charge",
@@ -573,6 +642,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 4571,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/steel_ball.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "9": {
@@ -612,7 +686,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10509": {
           "name": "Mechanical Rage",
@@ -626,13 +701,25 @@
           "name": "Armor-Piercing Bullets",
           "cost": 100,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 0.5
+          }
         },
         "180209": {
           "name": "Ignite",
           "cost": 150,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 117,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/fang.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 63,
+          "intervalSeconds": 1.5
         }
       }
     },
@@ -685,13 +772,25 @@
           "name": "Impact Drill",
           "cost": 150,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 1.25
+          }
         },
         "180110": {
           "name": "Replicate",
           "cost": 250,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 250,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/crawler.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 79,
+          "intervalSeconds": 0.6
         }
       }
     },
@@ -756,7 +855,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10311": {
           "name": "Launcher Overload",
@@ -772,6 +872,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 21339,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/overlord.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "12": {
@@ -817,7 +922,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10312": {
           "name": "Launcher Overload",
@@ -834,6 +940,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 1149,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/stormcaller.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "13": {
@@ -883,7 +994,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10513": {
           "name": "Mechanical Rage",
@@ -898,6 +1010,15 @@
           "cost": 100,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 3478,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/sledgehammer.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 608,
+          "intervalSeconds": 4.5
         }
       }
     },
@@ -942,7 +1063,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "11014": {
           "name": "Multi Control",
@@ -952,6 +1074,11 @@
           },
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 3249,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/hacker.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "15": {
@@ -1003,7 +1130,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10815": {
           "name": "Elite Marksman",
@@ -1016,6 +1144,15 @@
           "cost": 100,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 4813,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/arclight.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 365,
+          "intervalSeconds": 0.9
         }
       }
     },
@@ -1068,7 +1205,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10316": {
           "name": "Launcher Overload",
@@ -1090,7 +1228,19 @@
           "statModifiers": {
             "range": -25.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 2.0
+          }
+        }
+      },
+      "combat": {
+        "hp": 1491,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/phoenix.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 2814,
+          "intervalSeconds": 3.4
         }
       }
     },
@@ -1141,7 +1291,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10317": {
           "name": "Launcher Overload",
@@ -1175,6 +1326,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 113593,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/war_factory.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "18": {
@@ -1226,7 +1382,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "110181": {
           "name": "Floating Artillery Array",
@@ -1240,6 +1397,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 14115,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/wraith.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "19": {
@@ -1291,7 +1453,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10419": {
           "name": "Convergent Fire",
@@ -1306,6 +1469,15 @@
           "cost": 250,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 18632,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/scorpion.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 10650,
+          "intervalSeconds": 4.5
         }
       }
     },
@@ -1344,13 +1516,17 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10620": {
           "name": "Scorching Fire",
           "cost": 300,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 0.8499999998603016
+          }
         },
         "11020": {
           "name": "Scorching Charge",
@@ -1370,6 +1546,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 4222,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/fire_badger.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "21": {
@@ -1413,7 +1594,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10321": {
           "name": "Field Maintenance",
@@ -1433,6 +1615,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 14142,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/sabertooth.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "22": {
@@ -1506,7 +1693,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "11022": {
           "name": "Homing Missile",
@@ -1520,6 +1708,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 9529,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/typhoon.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "23": {
@@ -1589,6 +1782,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 48645,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/sandworm.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "24": {
@@ -1638,7 +1836,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10524": {
           "name": "Mechanical Rage",
@@ -1652,13 +1851,25 @@
           "name": "Armor-Piercing Bullets",
           "cost": 150,
           "statModifiers": {},
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {
+            "damageRate": 0.5
+          }
         },
         "11024": {
           "name": "Spider Mine",
           "cost": 150,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 14034,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/tarantula.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 496,
+          "intervalSeconds": 0.6
         }
       }
     },
@@ -1721,7 +1932,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "11025": {
           "name": "Sticky Oil Bomb",
@@ -1729,6 +1941,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 3412,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/phantom_ray.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "26": {
@@ -1778,7 +1995,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "180326": {
           "name": "Photon Emission",
@@ -1792,6 +2010,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 11991,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/farseer.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "27": {
@@ -1843,7 +2066,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "110271": {
           "name": "Fork",
@@ -1853,6 +2077,11 @@
           },
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 16065,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/raiden.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "28": {
@@ -1890,7 +2119,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10528": {
           "name": "Mechanical Rage",
@@ -1911,6 +2141,15 @@
           "cost": 300,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 879,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/hound.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 246,
+          "intervalSeconds": 2.4
         }
       }
     },
@@ -1955,7 +2194,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10299": {
           "name": "Range Enhancement",
@@ -1987,6 +2227,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 66955,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/abyss.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "30": {
@@ -2033,7 +2278,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "10930": {
           "name": "Charged Shot",
@@ -2054,6 +2300,15 @@
           "cost": 300,
           "statModifiers": {},
           "addedRoles": []
+        }
+      },
+      "combat": {
+        "hp": 1370,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/void_eye.yaml",
+        "levelRule": "linear-1-to-9",
+        "attack": {
+          "damage": 1144,
+          "intervalSeconds": 3.3
         }
       }
     },
@@ -2104,7 +2359,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "123101": {
           "name": "Electromagnetic Twin",
@@ -2132,6 +2388,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 8538,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/vortex.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "32": {
@@ -2175,7 +2436,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "110321": {
           "name": "Dual Wield",
@@ -2191,6 +2453,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 16500,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/centurion.yaml",
+        "levelRule": "linear-1-to-9"
       }
     },
     "2002": {
@@ -2234,7 +2501,8 @@
           "statModifiers": {
             "range": 40.0
           },
-          "addedRoles": []
+          "addedRoles": [],
+          "combatModifier": {}
         },
         "1032002": {
           "name": "Extended Range Ammo",
@@ -2262,6 +2530,11 @@
           "statModifiers": {},
           "addedRoles": []
         }
+      },
+      "combat": {
+        "hp": 136657,
+        "source": "https://github.com/qbisi/mechcore/blob/c6326dae74da9542e03c34da0c0b8066be193ae6/config/units/mountain.yaml",
+        "levelRule": "linear-1-to-9"
       }
     }
   },
@@ -2852,27 +3125,47 @@
     },
     "13030002": {
       "name": "Heavy Armor",
-      "cost": 50
+      "cost": 50,
+      "combatModifier": {
+        "hpRate": 0.75
+      }
     },
     "13030003": {
       "name": "Improved Firepower Control System",
-      "cost": 50
+      "cost": 50,
+      "combatModifier": {
+        "damageRate": 0.6499999999068677
+      }
     },
     "13030004": {
       "name": "Enhancement Module",
-      "cost": 200
+      "cost": 200,
+      "combatModifier": {
+        "hpRate": 0.25,
+        "damageRate": 0.25
+      }
     },
     "13030005": {
       "name": "Haste Module",
-      "cost": 0
+      "cost": 0,
+      "combatModifier": {
+        "damageRate": 0.3499999998603016
+      }
     },
     "13030006": {
       "name": "Super Heavy Armor",
-      "cost": 200
+      "cost": 200,
+      "combatModifier": {
+        "hpRate": 1.5
+      }
     },
     "13030007": {
       "name": "Amplifying Core",
-      "cost": 150
+      "cost": 150,
+      "combatModifier": {
+        "hpRate": 0.5,
+        "damageRate": 0.5
+      }
     },
     "13030008": {
       "name": "Advanced Firepower Control System",
@@ -2880,7 +3173,11 @@
     },
     "13030009": {
       "name": "Small Amplifying Core",
-      "cost": null
+      "cost": null,
+      "combatModifier": {
+        "hpRate": 0.14999999990686774,
+        "damageRate": 0.14999999990686774
+      }
     },
     "13030010": {
       "name": "Dominion Core",
@@ -2892,11 +3189,17 @@
     },
     "13030522": {
       "name": "Secondary Fire Control System",
-      "cost": null
+      "cost": null,
+      "combatModifier": {
+        "damageRate": 0.25
+      }
     },
     "13030523": {
       "name": "Secondary Heavy Armor",
-      "cost": null
+      "cost": null,
+      "combatModifier": {
+        "hpRate": 0.2999999998137355
+      }
     },
     "13040001": {
       "name": "Deployment Module",

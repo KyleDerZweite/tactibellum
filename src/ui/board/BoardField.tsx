@@ -1,4 +1,4 @@
-import { useId, useRef } from "react";
+import { useId, useRef, useState } from "react";
 import type { PointerEvent } from "react";
 import type { BoardRectangle } from "../../core/contracts/board";
 import { standardBoard } from "../../core/geometry";
@@ -52,6 +52,7 @@ function UnitToken({
       tabIndex={inView ? 0 : -1}
       aria-label={unitLabel(data)}
       aria-pressed={selected}
+      data-unit-key={data.key}
       data-player={index}
       data-diff={showDiff ? diff : undefined}
       data-highlighted={highlighted}
@@ -128,6 +129,9 @@ function UnitToken({
   );
 }
 
+type Position = { x: number; y: number };
+export type BoardLine = Position & { unitInstanceId: string };
+
 type BoardFieldProps = {
   bounds: BoardRectangle;
   viewBox: BoardRectangle;
@@ -144,7 +148,9 @@ type BoardFieldProps = {
   region?: BoardRectangle;
   filter: string;
   range: string;
-  onPan: (dx: number, dy: number) => void;
+  onPan?: (dx: number, dy: number) => void;
+  onMoveUnit?: (key: string, position: Position) => void;
+  lines?: BoardLine[];
   onSelect: (key?: string) => void;
 };
 
@@ -165,12 +171,19 @@ export function BoardField({
   filter,
   range,
   onPan,
+  onMoveUnit,
+  lines,
   onSelect,
 }: BoardFieldProps) {
   const grid = useId();
-  const drag = useRef<{ id: number; x: number; y: number; moved: boolean }>(
-    null,
-  );
+  const drag = useRef<{
+    id: number;
+    x: number;
+    y: number;
+    moved: boolean;
+    unit?: { key: string; offset: Position };
+  }>(null);
+  const [preview, setPreview] = useState<{ key: string; position: Position }>();
   const sign = flipped ? -1 : 1;
   const point = (x: number, y: number) => ({ x: sign * x, y: -sign * y });
   function rect({ x, y, width, height }: BoardRectangle) {
@@ -182,20 +195,98 @@ export function BoardField({
   }
   const area = rect(bounds);
 
-  function startPan(event: PointerEvent<SVGSVGElement>) {
-    if (
-      event.button !== 0 ||
-      drag.current ||
-      (event.target as Element).closest(".board-unit")
-    )
-      return;
+  function pointerPosition(event: PointerEvent<SVGSVGElement>) {
+    const svg = event.currentTarget;
+    const matrix = svg.getScreenCTM();
+    if (!matrix) return;
+    const pointer = svg.createSVGPoint();
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+    const local = pointer.matrixTransform(matrix.inverse());
+    return point(local.x, local.y);
+  }
+
+  function unitCenter({ key, unit }: DisplayUnit) {
+    const position = preview?.key === key ? preview.position : unit;
+    return point(position.x, position.y);
+  }
+
+  function startDrag(event: PointerEvent<SVGSVGElement>) {
+    if (event.button !== 0 || drag.current) return;
+    const token = (event.target as Element).closest<SVGGElement>(".board-unit");
+    const key = token?.getAttribute("data-unit-key");
+    const unit = onMoveUnit && units.find((data) => data.key === key)?.unit;
+    const position = unit && pointerPosition(event);
+    if (token && (!unit || !position || !key)) return;
+    // Touch does not consistently shift focus away from the inspector.
+    if (onMoveUnit)
+      (token ?? event.currentTarget).focus({ preventScroll: true });
     drag.current = {
       id: event.pointerId,
       x: event.clientX,
       y: event.clientY,
       moved: false,
+      unit:
+        unit && position && key
+          ? { key, offset: { x: unit.x - position.x, y: unit.y - position.y } }
+          : undefined,
     };
     event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function moveDrag(event: PointerEvent<SVGSVGElement>) {
+    const active = drag.current;
+    if (active?.id !== event.pointerId) return;
+    const dx = event.clientX - active.x;
+    const dy = event.clientY - active.y;
+    if (!active.moved && Math.hypot(dx, dy) < 4) return;
+    if (active.unit) {
+      const position = pointerPosition(event);
+      if (!position) return;
+      active.moved = true;
+      setPreview({
+        key: active.unit.key,
+        position: {
+          x: position.x + active.unit.offset.x,
+          y: position.y + active.unit.offset.y,
+        },
+      });
+      return;
+    }
+    const scale = event.currentTarget.getScreenCTM()?.a;
+    if (!scale) return;
+    active.x = event.clientX;
+    active.y = event.clientY;
+    active.moved = true;
+    onPan?.(-dx / scale, -dy / scale);
+  }
+
+  function endDrag(event: PointerEvent<SVGSVGElement>) {
+    const active = drag.current;
+    if (active?.id !== event.pointerId) return;
+    if (active.unit) {
+      onSelect(active.unit.key);
+      const position = pointerPosition(event);
+      if (
+        position &&
+        (active.moved ||
+          Math.hypot(event.clientX - active.x, event.clientY - active.y) >= 4)
+      ) {
+        onMoveUnit?.(active.unit.key, {
+          x: position.x + active.unit.offset.x,
+          y: position.y + active.unit.offset.y,
+        });
+      }
+    } else if (!active.moved) {
+      onSelect();
+    }
+    cancelDrag(event);
+  }
+
+  function cancelDrag(event: PointerEvent<SVGSVGElement>) {
+    if (drag.current?.id !== event.pointerId) return;
+    drag.current = null;
+    setPreview(undefined);
   }
 
   return (
@@ -203,29 +294,13 @@ export function BoardField({
       className="board-field"
       aria-label="Deployment board"
       role="group"
+      tabIndex={onMoveUnit ? -1 : undefined}
       viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
-      onPointerDown={startPan}
-      onPointerMove={(event) => {
-        const active = drag.current;
-        if (active?.id !== event.pointerId) return;
-        const dx = event.clientX - active.x;
-        const dy = event.clientY - active.y;
-        if (!active.moved && Math.hypot(dx, dy) < 4) return;
-        const scale = event.currentTarget.getScreenCTM()?.a;
-        if (!scale) return;
-        active.x = event.clientX;
-        active.y = event.clientY;
-        active.moved = true;
-        onPan(-dx / scale, -dy / scale);
-      }}
-      onPointerUp={(event) => {
-        if (drag.current?.id !== event.pointerId) return;
-        if (!drag.current.moved) onSelect();
-        drag.current = null;
-      }}
-      onLostPointerCapture={(event) => {
-        if (drag.current?.id === event.pointerId) drag.current = null;
-      }}
+      onPointerDown={startDrag}
+      onPointerMove={moveDrag}
+      onPointerUp={endDrag}
+      onPointerCancel={cancelDrag}
+      onLostPointerCapture={cancelDrag}
     >
       <defs>
         <pattern id={grid} width="20" height="20" patternUnits="userSpaceOnUse">
@@ -306,12 +381,13 @@ export function BoardField({
           if (data.removed || !knownPosition(data.unit) || !data.range)
             return null;
           if (
+            range !== "all" &&
             !(range === "selected"
               ? selectedKey === data.key
               : data.roles.includes(range))
           )
             return null;
-          const center = point(data.unit.x, data.unit.y);
+          const center = unitCenter(data);
           return (
             <circle
               key={data.key}
@@ -323,13 +399,32 @@ export function BoardField({
             />
           );
         })}
+        {lines?.map(({ unitInstanceId, x, y }, index) => {
+          const data = units.find(
+            ({ unit }) => unit.instanceId === unitInstanceId,
+          );
+          if (!data || data.removed || !knownPosition(data.unit)) return null;
+          const start = unitCenter(data);
+          const end = point(x, y);
+          return (
+            <line
+              key={index}
+              className="board-timing-line"
+              data-player={data.index}
+              x1={start.x}
+              y1={start.y}
+              x2={end.x}
+              y2={end.y}
+            />
+          );
+        })}
         {units
           .filter(({ unit }) => knownPosition(unit))
           .map((data) => (
             <UnitToken
               key={`${data.key}:${data.removed}`}
               data={data}
-              {...point(data.unit.x, data.unit.y)}
+              {...unitCenter(data)}
               viewBox={viewBox}
               selected={selectedKey === data.key}
               highlighted={highlightedKeys.has(data.key)}

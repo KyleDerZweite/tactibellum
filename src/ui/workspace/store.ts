@@ -5,7 +5,13 @@ import type { PatchData } from "../../core/contracts/patch";
 import type { RawReplay } from "../../core/parser";
 
 export type ReplayView =
-  "overview" | "board" | "charts" | "findings" | "action-log" | "raw-json";
+  | "overview"
+  | "planner"
+  | "board"
+  | "charts"
+  | "findings"
+  | "action-log"
+  | "raw-json";
 
 interface Workspace {
   match?: MatchSnapshotV1;

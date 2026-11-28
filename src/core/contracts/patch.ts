@@ -1,11 +1,21 @@
 import { z } from "zod";
 
+export const maxUnitLevel = 9;
+
 const catalogEntrySchema = z.object({
   name: z.string().min(1),
   cost: z.number().nonnegative().nullable(),
 });
 
+const combatModifier = z
+  .object({
+    hpRate: z.number().nonnegative().optional(),
+    damageRate: z.number().nonnegative().optional(),
+  })
+  .optional();
+
 const techSchema = catalogEntrySchema.extend({
+  combatModifier,
   statModifiers: z.record(z.string(), z.number()),
   addedRoles: z.array(z.string()),
 });
@@ -21,6 +31,19 @@ export const patchUnitSchema = catalogEntrySchema.extend({
     z.literal(400),
     z.literal(800),
   ]),
+  combat: z
+    .object({
+      hp: z.number().int().positive(),
+      source: z.url(),
+      levelRule: z.literal("linear-1-to-9"),
+      attack: z
+        .object({
+          damage: z.number().int().positive(),
+          intervalSeconds: z.number().positive(),
+        })
+        .optional(),
+    })
+    .optional(),
   footprint: z.object({
     width: z.number().positive(),
     height: z.number().positive(),
@@ -43,7 +66,7 @@ export const patchDataSchema = z.object({
   units: z.record(z.string(), patchUnitSchema),
   spells: entries,
   specialists: entries,
-  items: entries,
+  items: z.record(z.string(), catalogEntrySchema.extend({ combatModifier })),
   devices: entries,
   towers: entries,
   blueprints: entries,

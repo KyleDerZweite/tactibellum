@@ -2,6 +2,7 @@ import type { BoardHighlight } from "../../core/contracts/board";
 import type {
   BoardUnit,
   MatchSnapshotV1,
+  PlayerMeta,
   RoundSnapshot,
 } from "../../core/contracts/match";
 import { createGameCatalog } from "../../core/game-data";
@@ -44,51 +45,58 @@ export function boardUnits(
         ? (state.removedUnits ?? []).map((unit) => ({ unit, removed: true }))
         : []),
     ];
-    return units.map(({ unit, removed }) => {
-      const entry = catalog.unit(unit.unitId);
-      const techs = unit.techIds.map((id) => catalog.tech(unit.unitId, id));
-      const roles = entry.isUnknown
-        ? []
-        : [
-            ...new Set([
-              ...entry.roles,
-              ...(entry.isAir ? ["air"] : []),
-              ...techs.flatMap((tech) =>
-                tech.isUnknown ? [] : tech.addedRoles,
-              ),
-            ]),
-          ];
-      const baseRange = entry.isUnknown ? null : entry.range;
-      return {
-        unit,
-        player,
-        index,
-        key: unitKey({ playerId: player.id, instanceId: unit.instanceId }),
-        entry,
-        techs,
-        item: unit.itemId ? catalog.lookup("item", unit.itemId) : undefined,
-        roles,
-        range:
-          baseRange === null
-            ? null
-            : Math.max(
-                0,
-                baseRange +
-                  techs.reduce(
-                    (sum, tech) =>
-                      sum +
-                      (tech.isUnknown ? 0 : (tech.statModifiers.range ?? 0)),
-                    0,
-                  ),
-              ),
-        diff: removed ? ("removed" as const) : unit.statusThisRound,
-        removed,
-      };
-    });
+    return units.map(({ unit, removed }) =>
+      displayUnit(unit, player, index, catalog, removed),
+    );
   });
 }
 
-export type DisplayUnit = ReturnType<typeof boardUnits>[number];
+export function displayUnit(
+  unit: BoardUnit,
+  player: PlayerMeta,
+  index: number,
+  catalog: Catalog,
+  removed = false,
+) {
+  const entry = catalog.unit(unit.unitId);
+  const techs = unit.techIds.map((id) => catalog.tech(unit.unitId, id));
+  const roles = entry.isUnknown
+    ? []
+    : [
+        ...new Set([
+          ...entry.roles,
+          ...(entry.isAir ? ["air"] : []),
+          ...techs.flatMap((tech) => (tech.isUnknown ? [] : tech.addedRoles)),
+        ]),
+      ];
+  const baseRange = entry.isUnknown ? null : entry.range;
+  return {
+    unit,
+    player,
+    index,
+    key: unitKey({ playerId: player.id, instanceId: unit.instanceId }),
+    entry,
+    techs,
+    item: unit.itemId ? catalog.lookup("item", unit.itemId) : undefined,
+    roles,
+    range:
+      baseRange === null
+        ? null
+        : Math.max(
+            0,
+            baseRange +
+              techs.reduce(
+                (sum, tech) =>
+                  sum + (tech.isUnknown ? 0 : (tech.statModifiers.range ?? 0)),
+                0,
+              ),
+          ),
+    diff: removed ? ("removed" as const) : unit.statusThisRound,
+    removed,
+  };
+}
+
+export type DisplayUnit = ReturnType<typeof displayUnit>;
 
 export function unitLabel({ entry, player, unit, diff }: DisplayUnit) {
   return `${entry.name} #${unit.instanceId}, ${player.name}, level ${unit.level}${diff === "removed" ? ", removed" : ""}`;

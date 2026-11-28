@@ -469,3 +469,11 @@
   height: 100%;
   border: 0;
 }
+
+.board-timing-line {
+  stroke: var(--team);
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}

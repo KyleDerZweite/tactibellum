@@ -1,0 +1,64 @@
+.planner .board-controls label select {
+  width: 10rem;
+}
+
+.planner .board-field {
+  cursor: default;
+}
+
+.planner .board-unit {
+  cursor: grab;
+}
+
+.planner .board-unit:active {
+  cursor: grabbing;
+}
+
+.planner-unit-editor,
+.planner-techs,
+.planner-coordinates {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.planner-unit-editor {
+  margin-block: 0.65rem;
+}
+
+.planner-coordinates {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.planner-unit-editor input[type="number"] {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--color-control-border);
+  border-radius: 0.25rem;
+  background: var(--color-raised);
+  padding-inline: 0.65rem;
+  font: 0.875rem var(--font-mono);
+}
+
+.planner-techs,
+.planner-hint {
+  font-size: 0.875rem;
+}
+
+.planner-techs legend {
+  margin-bottom: 0.25rem;
+}
+
+.planner-techs label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1.65rem;
+}
+
+.planner-techs input {
+  accent-color: var(--color-accent);
+}
+
+.planner-hint {
+  color: var(--color-muted);
+}

@@ -31,7 +31,11 @@
     },
     "spells": { "$ref": "#/$defs/namedEntryMap" },
     "specialists": { "$ref": "#/$defs/namedEntryMap" },
-    "items": { "$ref": "#/$defs/namedEntryMap" },
+    "items": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/item" }
+    },
     "devices": { "$ref": "#/$defs/namedEntryMap" },
     "towers": { "$ref": "#/$defs/namedEntryMap" },
     "blueprints": { "$ref": "#/$defs/namedEntryMap" }
@@ -58,6 +62,70 @@
         "height": { "type": "number", "exclusiveMinimum": 0 }
       }
     },
+    "combat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hp": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "source": {
+          "type": "string",
+          "format": "uri"
+        },
+        "levelRule": {
+          "const": "linear-1-to-9"
+        },
+        "attack": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "damage": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "intervalSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": ["damage", "intervalSeconds"]
+        }
+      },
+      "required": ["hp", "source", "levelRule"]
+    },
+    "combatModifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hpRate": {
+          "type": "number",
+          "minimum": 0
+        },
+        "damageRate": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": []
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "cost"],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "cost": {
+          "$ref": "#/$defs/nullableNonnegativeNumber"
+        },
+        "combatModifier": {
+          "$ref": "#/$defs/combatModifier"
+        }
+      }
+    },
     "tech": {
       "type": "object",
       "additionalProperties": false,
@@ -65,6 +133,7 @@
       "properties": {
         "name": { "$ref": "#/$defs/nonemptyString" },
         "cost": { "$ref": "#/$defs/nullableNonnegativeNumber" },
+        "combatModifier": { "$ref": "#/$defs/combatModifier" },
         "statModifiers": {
           "type": "object",
           "additionalProperties": { "type": "number" }
@@ -96,6 +165,7 @@
         "cost": { "$ref": "#/$defs/nonnegativeNumber" },
         "unlockCost": { "$ref": "#/$defs/nullableNonnegativeNumber" },
         "tier": { "enum": [100, 200, 300, 400, 800] },
+        "combat": { "$ref": "#/$defs/combat" },
         "footprint": { "$ref": "#/$defs/footprint" },
         "range": { "$ref": "#/$defs/nullableNonnegativeNumber" },
         "speed": { "$ref": "#/$defs/nullableNonnegativeNumber" },

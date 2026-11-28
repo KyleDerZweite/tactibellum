@@ -12,6 +12,7 @@ import {
   standardBoard,
 } from "../../core/geometry";
 import { useWorkspace } from "../workspace/store";
+import { RangeControl, roleNames } from "./RangeControl";
 import { BoardField } from "./BoardField";
 import { BoardInspector } from "./BoardInspector";
 import { BoardControlIcon } from "./BoardControlIcon";
@@ -25,14 +26,6 @@ import {
 import "./board.css";
 
 const initialCamera = { x: 0, y: 0, zoom: 1 };
-const roleNames: Record<string, string> = {
-  air: "Air",
-  "anti-air": "Anti-air",
-  chaff: "Chaff",
-  "chaff-clear": "Chaff clear",
-  giant: "Giant",
-  "single-target": "Single target",
-};
 function fallbackBounds(match: MatchSnapshotV1): BoardRectangle {
   const bounds = { ...standardBoard.bounds };
   let edgeX = bounds.width / 2;
@@ -275,21 +268,7 @@ function MatchBoard({
                     ))}
                   </select>
                 </label>
-                <label>
-                  Range{" "}
-                  <select
-                    value={range}
-                    onChange={(event) => setRange(event.currentTarget.value)}
-                  >
-                    <option value="">Off</option>
-                    <option value="selected">Selected unit</option>
-                    {roles.map((role) => (
-                      <option key={role} value={role}>
-                        {roleNames[role] ?? role}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <RangeControl range={range} roles={roles} onChange={setRange} />
               </div>
               <BoardField
                 bounds={bounds}

@@ -112,6 +112,9 @@ it("opens the inspector from a unit, draws unit and role ranges, and reveals rem
   ).toBeTruthy();
   choose("Range", "anti-air");
   expect(circles().length).toBeGreaterThan(1);
+  const antiAir = circles().length;
+  choose("Range", "all");
+  expect(circles().length).toBeGreaterThan(antiAir);
   const canvas = screen.getByRole("group", { name: "Deployment board" });
   fireEvent.click(screen.getByRole("button", { name: "Round 3" }));
   expect(within(canvas).queryByRole("button", { name: /removed/ })).toBeNull();

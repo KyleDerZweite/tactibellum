@@ -5,6 +5,7 @@ import type { ReplayView } from "../workspace/store";
 
 const views: [ReplayView, string][] = [
   ["overview", "Overview"],
+  ["planner", "Analysis Board"],
   ["board", "Tactical Board"],
   ["charts", "Economy & Graphs"],
   ["findings", "Rule Findings"],
@@ -93,31 +94,33 @@ export function Layout({ children, replayName, patch }: LayoutProps) {
         >
           <nav aria-label="Replay views">
             <ul className="view-list">
-              {views.map(([id, label]) => (
-                <li
-                  key={id}
-                  className={
-                    id !== "overview" && !replayName
-                      ? "unavailable-view"
-                      : undefined
-                  }
-                >
-                  {id === "overview" || replayName ? (
-                    <a
-                      href="#main"
-                      aria-current={view === id ? "page" : undefined}
-                      onClick={() => {
-                        setView(id);
-                        setSidebarOpen(false);
-                      }}
-                    >
-                      {label}
-                    </a>
-                  ) : (
-                    label
-                  )}
-                </li>
-              ))}
+              {views.map(([id, label]) => {
+                const enabled =
+                  id === "overview" || id === "planner" || Boolean(replayName);
+                return (
+                  <li
+                    key={id}
+                    className={enabled ? undefined : "unavailable-view"}
+                  >
+                    {enabled ? (
+                      <a
+                        href="#main"
+                        aria-current={view === id ? "page" : undefined}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setView(id);
+                          setSidebarOpen(false);
+                          document.getElementById("main")?.focus();
+                        }}
+                      >
+                        {label}
+                      </a>
+                    ) : (
+                      label
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
           <div className="resource-links">

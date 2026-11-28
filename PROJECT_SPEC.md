@@ -9,6 +9,10 @@
 
 ## 1. Produktvision & Scope
 
+The standalone analysis board is the primary tool. Users can arrange units on a standard 1v1 map or copy a round from a local replay into an editable board. The board uses a versioned patch catalog for range, movement, and supported stationary damage calculations. A share link contains the scenario and patch version in the URL fragment. It has no replay file, player names, or account data. Leaderboard and meta tracking are separate roadmap work.
+
+Timing is a straight-line estimate to a point on the map. Breakpoints compare a modeled attack with a stationary target and disclose their assumptions and unsupported effects. These estimates do not simulate targeting, pathfinding, or a battle.
+
 **Tactibellum** ist ein kostenloses, quelloffenes, rein statisches Replay-Analyse- und 2D-Taktikboard-Tool für **Mechabellum**. Spieler ziehen eine lokale `.grbr`-Replay-Datei per Drag & Drop in den Browser und erhalten sofort:
 1. Eine interaktive, rundenbasierte **2D-Board-Ansicht** aller Spieler-Boards (Positionen, Footprints, Reichweiten, Techs, Upgrades, Spells, Devices).
 2. **Statistische Verlaufskurven** (Army Value, Supply-Effizienz, Rollenverteilung, Tech-Investitionen, Lane-Balance).
